@@ -8,6 +8,7 @@ function App() {
       <Routes>
           <Route element={<></>} />
           <Route element={<></>} />
+          <Route element={<></>} />
       </Routes>
     </div>
   );
