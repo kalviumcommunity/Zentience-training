@@ -1,15 +1,21 @@
 import React from 'react';
-import { Route,Routes } from 'react-router-dom';
-import LandingPage from './component/LandingPage/LandingPage';
+
+import { Route, Routes } from 'react-router-dom';
+import Dasboard from './component/Dashboard/Dasboard';
+import SimpleSidebar from './component/SideBar/LeftBar';
+
 
 
 function App() {
   return (
     <div>
       <Routes>
-          <Route path='/'  element={<LandingPage />}/>
+
+          <Route path="/" element={<Dasboard />} />
+
           <Route element={<></>} />
           <Route element={<></>} />
+
       </Routes>
     </div>
   );

@@ -1,0 +1,8 @@
+.rightbar {
+    width: 25rem;
+    flex-direction: column;
+}
+
+.rightbar div {
+    flex-direction: column;
+}
