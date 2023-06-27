@@ -32,19 +32,20 @@ function StudentLogin() {
       direction="column"
       bg={useColorModeValue("gray.50", "gray.800")}
     >
-      <Box display="Flex" alignItems="center" mt={59} ml={20} className="logoo">
-        <img src="./assets/ipsum.png"></img> <Heading fontSize={"2xl"} >Logo ipsum</Heading>
+      <Box display="Flex" alignItems="center" mt={69} ml={120}>
+        <img src="./assets/ipsum.png"></img>{" "}
+        <Heading fontSize={"2xl"}>Eudtrack</Heading>
       </Box>
 
-      <Stack alignItems="center" mt={20}>
+      <Stack alignItems="center" mt={55}>
         <Stack align={"center"}>
-          <Heading color={"blue.900"} mb={4} fontSize={"2xl"}>
+          <Heading fontWeight={700} color={"blue.900"} mb={4} fontSize={"2xl"}>
             Log in as a Student
           </Heading>
-          <Text fontSize={15} color={"gray.600"} >
+          <Text fontSize={15} color={"gray.800"}>
             Use the Registration id and Password
           </Text>
-          <Text fontSize={15} color={"gray.600"}>
+          <Text fontSize={15} color={"gray.800"}>
             provided by your teacher to log in.
           </Text>
         </Stack>
@@ -55,7 +56,11 @@ function StudentLogin() {
               <FormControl>
                 <FormLabel>
                   <Input
-                    {...register("registrationId")} // Update the ref assignment
+                    {...register("registrationId", {
+                      required: true,
+                      minLength: 10,
+                      maxLength: 12,
+                    })} // Update the ref assignment
                     name="registrationId"
                     placeholder="Registration Id"
                     type="text"
@@ -66,7 +71,11 @@ function StudentLogin() {
               <FormControl>
                 <FormLabel>
                   <Input
-                    {...register("password")} // Update the ref assignment
+                    {...register("password", {
+                      required: true,
+                      minLength: 8,
+                      maxLength: 20,
+                    })} // Update the ref assignment
                     name="password"
                     placeholder="Password"
                     type="password"
@@ -86,7 +95,9 @@ function StudentLogin() {
             </Stack>
           </form>
         </Box>
-        <Text mt={49}>You can change the password later.</Text>
+        <Text color={"gray.800"} mt={49}>
+          You can change the password later.
+        </Text>
       </Stack>
     </Flex>
   );
