@@ -3,6 +3,7 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Dasboard from './component/Dashboard/Dasboard';
 import SimpleSidebar from './component/SideBar/LeftBar';
+import PostingAnnouncements from './component/Announcements/PostingAnnouncements';
 
 
 
@@ -13,7 +14,7 @@ function App() {
 
           <Route path="/" element={<Dasboard />} />
 
-          <Route element={<></>} />
+          <Route path="/announcements" element={<PostingAnnouncements />} />
           <Route element={<></>} />
 
       </Routes>

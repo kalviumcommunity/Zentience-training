@@ -11,7 +11,7 @@ function Dasboard() {
       <Container ml="220px">
         <Heading>Dashboard</Heading>
       </Container>
-    </div>
+          </div>
   )
 }
 

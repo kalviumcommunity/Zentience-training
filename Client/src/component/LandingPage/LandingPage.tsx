@@ -1,5 +1,6 @@
 import React from 'react';
-import './LandingPage.css'; // Import the CSS file for styling
+import './LandingPage.css'; 
+// import './LandingPage.css'; // Import the CSS file for styling
 
 const LandingPage = () => {
   return (
