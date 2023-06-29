@@ -2,8 +2,9 @@ import React from 'react';
 
 import { Route, Routes } from 'react-router-dom';
 import Dasboard from './component/Dashboard/Dasboard';
+import SimpleSidebar from './component/SideBar/LeftBar';
+import PostingAnnouncements from './component/Announcements/PostingAnnouncements';
 import LandingPage from './component/LandingPage/LandingPage';
-import StudentLogin from './component/StudentLogin/StudentLogin';
 
 
 
@@ -14,8 +15,8 @@ function App() {
 
           <Route path="/" element={<LandingPage />} />
 
-          <Route path='/student-login' element={<StudentLogin/>} />
-          <Route path='/dasbord' element={<Dasboard/>} />
+          <Route path="/announcements" element={<PostingAnnouncements />} />
+          <Route element={<></>} />
 
       </Routes>
     </div>

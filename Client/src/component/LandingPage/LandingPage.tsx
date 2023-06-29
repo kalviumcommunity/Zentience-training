@@ -1,5 +1,5 @@
 import React from 'react';
-import './LandingPage.css'; // Import the CSS file for styling
+import './LandingPage.css'; 
 
 const LandingPage = () => {
   return (
@@ -12,14 +12,14 @@ const LandingPage = () => {
         <p>Simplify Student Management with our Powerful System</p>
         <div className='buttons'> 
           <button className="login-button">For Teachers
-          <div>
+          <div className='triangles'>
           <img src='./assets/triangle.svg' alt="Image" className="triangle1"></img>
           <img src='./assets/triangle.svg' alt="Image" className="triangle2"></img>
           <img src='./assets/triangle.svg' alt="Image" className="triangle3"></img>
           </div>
           </button>
           <button className="login-button">For Students
-          <div>
+          <div className='triangles'>
           <img src='./assets/triangle.svg' alt="Image" className="triangle1"></img>
           <img src='./assets/triangle.svg' alt="Image" className="triangle2"></img>
           <img src='./assets/triangle.svg' alt="Image" className="triangle3"></img>
