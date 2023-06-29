@@ -1,8 +1,26 @@
+
 import React from 'react';
 import { Container, Heading, Text, Select, Input, Textarea, Button, Flex } from '@chakra-ui/react';
 import LeftBar from '../SideBar/LeftBar';
+import useAnnouncementStore from './AnnouncementStore';
 
 function PostingAnnouncements() {
+  const { title, description, setTitle, setDescription, resetForm } = useAnnouncementStore();
+
+  const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setTitle(event.target.value);
+  };
+
+  const handleDescriptionChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setDescription(event.target.value);
+  };
+
+  const handlePost = () => {
+    console.log('Title:', title);
+    console.log('Description:', description);
+    resetForm();
+  };
+
   return (
     <div className='announcements'>
       <LeftBar />
@@ -14,17 +32,44 @@ function PostingAnnouncements() {
             <option value='option3'>Class X-C</option>
           </Select>
           <div style={{ marginTop: '20px' }}>
-          <Heading fontSize='25px'  marginBottom='70px'>Compose Announcement</Heading>
-            <Input width='1074px' fontWeight='600' color='rgba(0, 0, 0, 0.75)' placeholder='Title' />
+            <Heading fontSize='25px'  marginBottom='70px'>Compose Announcement</Heading>
+            <Input
+              width='1074px'
+              fontWeight='600'
+              color='rgba(0, 0, 0, 0.75)'
+              placeholder='Title'
+              value={title}
+              onChange={handleTitleChange}
+            />
           </div>
           <div style={{ marginTop: '15px' }}>
-            <Textarea width='1074px' height='381px' fontWeight='600' color='rgba(0, 0, 0, 0.75)' resize='none' placeholder='Description' />
+            <Textarea
+              width='1074px'
+              height='381px'
+              fontWeight='600'
+              color='rgba(0, 0, 0, 0.75)'
+              resize='none'
+              placeholder='Description'
+              value={description}
+              onChange={handleDescriptionChange}
+            />
           </div>
-          <Button marginTop='20px' backgroundColor='black' width='229px' fontSize='15' color='white' alignSelf="flex-end">POST</Button>
+          <Button
+            marginTop='20px'
+            backgroundColor='black'
+            width='229px'
+            fontSize='15'
+            color='white'
+            alignSelf="flex-end"
+            onClick={handlePost}
+          >
+            POST
+          </Button>
         </Flex>
-      </Container>      
+      </Container>
     </div>
   );
 }
 
 export default PostingAnnouncements;
+
