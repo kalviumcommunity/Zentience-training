@@ -18,7 +18,7 @@ function Dasboard() {
           <GridItem bg="gray.300" h="250px" colSpan={2} borderRadius="15px"></GridItem>
         </SimpleGrid>
       </Container>
-    </div>
+          </div>
   )
 }
 
