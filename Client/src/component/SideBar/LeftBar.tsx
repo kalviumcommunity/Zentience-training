@@ -1,5 +1,6 @@
 import { Box, Flex, Heading } from '@chakra-ui/react'
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 function LeftBar() {
   const sidebarStyles = {
@@ -27,16 +28,34 @@ function LeftBar() {
     }
   }
 
+  const activeButtonStyles = {
+    w:"160px",
+    height:"40px",
+    borderRadius:"5px",
+    m:"4px 0",
+    p:"0 20px",
+    fontSize:"14px",
+    fontWeight:"600",
+    cursor:"pointer",
+    bg:"#14274E",
+    textColor:"white" 
+  }
+
+  const navigate = useNavigate();
+  const path = window.location.pathname;
+  console.log(path);
+  
+
   return (
     <Flex sx={sidebarStyles} align="center" justifyContent="space-between" direction="column">
       <Box>
         <Heading size="lg">Edutrack</Heading>
         <Box mt="40px">
-          <Flex sx={buttonStyles} align="center" bg="#14274E" textColor="white"> Dashboard</Flex>
-          <Flex sx={buttonStyles} align="center"> Manage Students</Flex>
-          <Flex sx={buttonStyles} align="center"> Assign Tasks</Flex>
-          <Flex sx={buttonStyles} align="center"> Announcements</Flex>
-          <Flex sx={buttonStyles} align="center"> Attendance</Flex>
+          <Flex sx={path === "/home" ? activeButtonStyles : buttonStyles} align="center" onClick={() => navigate("/home")}> Dashboard</Flex>
+          <Flex sx={path === "/managestudents" ? activeButtonStyles : buttonStyles} align="center" onClick={() => navigate("/managestudents")}> Manage Students</Flex>
+          <Flex sx={path === "/assigntasks" ? activeButtonStyles : buttonStyles} align="center" onClick={() => navigate("/assigntasks")}> Assign Tasks</Flex>
+          <Flex sx={path === "/announcements" ? activeButtonStyles : buttonStyles} align="center" onClick={() => navigate("/announcements")}> Announcements</Flex>
+          <Flex sx={path === "/attendance" ? activeButtonStyles : buttonStyles} align="center" onClick={() => navigate("/attendance")}> Attendance</Flex>
         </Box>
       </Box>
       <Box>
