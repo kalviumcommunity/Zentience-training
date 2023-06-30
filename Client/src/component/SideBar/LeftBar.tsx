@@ -8,7 +8,9 @@ function LeftBar() {
     borderRight:"2px",
     borderColor:"gray.100",
     p:"30px 0",
-    position:"fixed"
+    position:"fixed",
+    top: "0",
+    left: "0"
   }
 
   const buttonStyles = {
