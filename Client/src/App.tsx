@@ -5,8 +5,9 @@ import Dasboard from './component/Dashboard/Dasboard';
 
 import SimpleSidebar from './component/SideBar/LeftBar';
 import LandingPage from './component/LandingPage/LandingPage';
+import PostingAnnouncements from './component/Announcements/PostingAnnouncements';
+
 import LandingPage from './component/LandingPage/LandingPage';
-import StudentLogin from './component/StudentLogin/StudentLogin';
 
 
 function App() {
@@ -18,8 +19,8 @@ function App() {
           <Route path="/home" element={<Dasboard />} />
 
 
-          <Route path='/student-login' element={<StudentLogin/>} />
-          <Route path='/dasbord' element={<Dasboard/>} />
+          <Route path="/announcements" element={<PostingAnnouncements />} />
+          <Route element={<></>} />
 
       </Routes>
     </div>
