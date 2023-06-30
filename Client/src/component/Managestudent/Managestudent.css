@@ -1,10 +1,46 @@
-.container{
-    height: 50vh;
-    width: 80vw;
-    text-align: center;
+.container {
+    position: absolute;
+    left: 17%;
+    height: 100rem;
+    width: 65vw;
+    background-color: whitesmoke;
+  }
+
+  .heading {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    align-content: center;
-    background-color: black;
-}
+    margin-left: 2rem;
+    margin-right: 2rem;
+    margin-bottom: 5%;
+  }
+
+  .studentInfo{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 3%;
+  }
+
+  .studentInfo:hover{
+    background-color: azure;
+  }
+
+  .studentInfo1{
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  .studentInfo2{
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  .InfoDetail{
+    width: 7rem;
+  }
+
+  .Info{
+    width: 7rem;
+    margin-left: 5%;
+  }
