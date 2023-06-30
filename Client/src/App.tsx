@@ -5,9 +5,8 @@ import Dasboard from './component/Dashboard/Dasboard';
 
 import SimpleSidebar from './component/SideBar/LeftBar';
 import LandingPage from './component/LandingPage/LandingPage';
-import PostingAnnouncements from './component/Announcements/PostingAnnouncements';
+import AssignTasks from './component/AssignTasks/AssignTasks';
 
-import LandingPage from './component/LandingPage/LandingPage';
 
 
 function App() {
@@ -17,10 +16,7 @@ function App() {
 
           <Route path="/" element={<LandingPage />} />
           <Route path="/home" element={<Dasboard />} />
-
-
-          <Route path="/announcements" element={<PostingAnnouncements />} />
-          <Route element={<></>} />
+          <Route path="/assigntasks" element={<AssignTasks />} />
 
       </Routes>
     </div>
