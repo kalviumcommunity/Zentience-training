@@ -8,6 +8,7 @@ function Dasboard() {
   return (
     <div className='dashboard'>
       <LeftBar />
+      <RightBar />
       <Container ml="220px">
         <Heading>Dashboard</Heading>
       </Container>
