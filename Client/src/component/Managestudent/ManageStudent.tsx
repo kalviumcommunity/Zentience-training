@@ -2,6 +2,8 @@ import React from 'react'
 import {Flex,Box,Image} from '@chakra-ui/react'
 import {MdOutlineModeEdit} from 'react-icons/md'
 import {RiDeleteBinLine} from 'react-icons/ri'
+import LeftBar from '../SideBar/LeftBar'
+import RightBar from '../SideBar/RightBar'
 
 const DummyData=[
   {
@@ -32,8 +34,10 @@ const DummyData=[
 
 function ManageStudent() {
   return (
-    
-        <Box as={'div'} ml={'16%'}  height={'100vh'}  bgColor={'gray.300'} mr={'16%'} >
+    <div>
+      <LeftBar/>
+      <RightBar/>
+        <Box as={'div'} ml={'13rem'}  height={'100vh'} mr={'13rem'} >
 
           <Flex mb={'2.5rem'} alignItems={'center'} pt={'2rem'} justifyContent={'space-between'} >
             <Box ml={'2rem'} fontSize={'2rem'} >
@@ -58,7 +62,7 @@ function ManageStudent() {
 
   DummyData.map((dummy)=>{
     return(
-      <Flex textAlign={'center'} _hover={{backgroundColor:'white'}} alignItems={'center'} justifyContent={'space-between'}  pl={'2.5rem'} h={'4rem'}  >
+      <Flex textAlign={'center'} _hover={{border:'1px solid grey',borderRadius:'1rem'}} alignItems={'center'} justifyContent={'space-between'}  pl={'2.5rem'} h={'4rem'}  >
             <Flex >
                   <Flex>{dummy.number}</Flex>
                   <Flex ml={'2rem'} >
@@ -76,21 +80,10 @@ function ManageStudent() {
   })
 
 }
-          {/* <Flex justifyContent={'space-between'} m={'2.5rem'} >
-            <Flex>
-                  <Flex>1</Flex>
-                  <Flex ml={'2rem'} >Image</Flex>
-                  <Flex ml={'2rem'} >Ethan Brooks</Flex>
-                  <Flex ml={'4rem'} >123456</Flex>
-            </Flex>
-            <Flex>
-                  <Flex mr={'2rem'} ><MdOutlineModeEdit/></Flex>
-                  <Flex mr={'2rem'} ><RiDeleteBinLine/></Flex>
-            </Flex>
-          </Flex> */}
+       
     
         </Box>
-      
+        </div>
  
   )
 }
