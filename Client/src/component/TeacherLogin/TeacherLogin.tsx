@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 function TeacherLogin() {
-  return (
-    <div>TeacherLogin</div>
-  )
+  return <div>TeacherLogin</div>;
 }
 
-export default TeacherLogin
+export default TeacherLogin;
