@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
-import { Auth0Provider } from "@auth0/auth0-react";
+import { Auth0ProviderWithNavigate } from "./auth-provider";
 import "./index.css";
 import App from "./App";
 // import reportWebVitals from './reportWebVitals';
@@ -13,15 +13,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <ChakraProvider>
     <BrowserRouter>
-      <Auth0Provider
-        domain="dev-qtx8h0qaiqf687yp.us.auth0.com"
-        clientId="cmQvjiIWFVExfxNEeba27SdVNktVDPRT"
-        authorizationParams={{
-          redirect_uri: window.location.origin,
-        }}
-      >
+      <Auth0ProviderWithNavigate>
         <App />
-      </Auth0Provider>
+      </Auth0ProviderWithNavigate>
     </BrowserRouter>
   </ChakraProvider>
 );
