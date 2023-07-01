@@ -2,9 +2,10 @@ import React from 'react';
 
 import { Route, Routes } from 'react-router-dom';
 import Dasboard from './component/Dashboard/Dasboard';
+
 import SimpleSidebar from './component/SideBar/LeftBar';
-import PostingAnnouncements from './component/Announcements/PostingAnnouncements';
 import LandingPage from './component/LandingPage/LandingPage';
+import AssignTasks from './component/AssignTasks/AssignTasks';
 
 
 
@@ -14,9 +15,8 @@ function App() {
       <Routes>
 
           <Route path="/" element={<LandingPage />} />
-
-          <Route path="/announcements" element={<PostingAnnouncements />} />
-          <Route element={<></>} />
+          <Route path="/home" element={<Dasboard />} />
+          <Route path="/assigntasks" element={<AssignTasks />} />
 
       </Routes>
     </div>
