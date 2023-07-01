@@ -1,10 +1,9 @@
-import React from "react";
-import "./LandingPage.css"; // Import the CSS file for styling
-import { useAuth0 } from "@auth0/auth0-react";
-
+import React from 'react';
+import './LandingPage.css'; // Import the CSS file for styling
+import {useAuth0} from '@auth0/auth0-react'
 
 const LandingPage = () => {
-  const { loginWithRedirect } = useAuth0();
+  const { isAuthenticated, loginWithRedirect } = useAuth0();
   return (
     <div className="landing-page">
       <div className="logo">
@@ -42,7 +41,6 @@ const LandingPage = () => {
                 ></img>
               </div>
             </button>
-
             <button className="login-button">
               For Students
               <div>
