@@ -9,6 +9,7 @@ function RightBar() {
     borderColor:"gray.100",
     p:"30px 0",
     position:"fixed",
+    top: "0",
     right: "0"
   }
 
@@ -54,7 +55,7 @@ function RightBar() {
     <Flex sx={sidebarStyles} align="center" justifyContent="space-between" direction="column">
       <Flex align="center" justifyContent="space-between" direction="column">
         <Box sx={userProfile}></Box>
-        <Heading size="md" m="25px 0 30px">Ethan Brooks</Heading>
+        <Heading size="md" m="25px 0 30px">David Foster</Heading>
         <Flex sx={editProfileButton} align="center" justifyContent="center" > Edit Profile</Flex>
       </Flex>
       <Box>
