@@ -1,9 +1,9 @@
 import React from "react";
 import "./LandingPage.css"; // Import the CSS file for styling
-import { useAuth0 } from "@auth0/auth0-react";
+import { LoginButton } from "../TeacherLogin/TeacherLogin";
 
 const LandingPage = () => {
-  const { isAuthenticated, loginWithRedirect } = useAuth0();
+  
   return (
     <div className="landing-page">
       <div className="logo">
@@ -18,31 +18,7 @@ const LandingPage = () => {
           </h1>
           <p>Simplify Student Management with our Powerful System</p>
           <div className="buttons">
-            <button
-              onClick={() =>
-                loginWithRedirect()
-              }
-              className="login-button"
-            >
-              For Teachers
-              <div>
-                <img
-                  src="./assets/triangle.svg"
-                  alt="Image"
-                  className="triangle1"
-                ></img>
-                <img
-                  src="./assets/triangle.svg"
-                  alt="Image"
-                  className="triangle2"
-                ></img>
-                <img
-                  src="./assets/triangle.svg"
-                  alt="Image"
-                  className="triangle3"
-                ></img>
-              </div>
-            </button>
+            <LoginButton/>
             <button className="login-button">
               For Students
               <div>
