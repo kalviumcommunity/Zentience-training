@@ -43,7 +43,6 @@ function LeftBar() {
 
   const navigate = useNavigate();
   const path = window.location.pathname;
-  console.log(path);
   
 
   return (
