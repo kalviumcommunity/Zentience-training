@@ -1,0 +1,21 @@
+{
+  "announcements": [
+    {
+      "title": "End term exam",
+      "description": "End term exam dates will announced soon.",
+      "id": 2
+    },
+    {
+      "title": "test ",
+      "description": "and",
+      "id": 3
+    }
+  ],
+  "assignments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ]
+}
