@@ -2,7 +2,11 @@ import { Box, Flex, Heading } from '@chakra-ui/react'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
-function LeftBar() {
+type LeftCardProps = {
+  isTeacher: boolean;
+}
+
+function LeftBar(props: LeftCardProps) {
   const sidebarStyles = {
     h:"calc(100vh)",
     w:"200px",
@@ -44,25 +48,44 @@ function LeftBar() {
   const navigate = useNavigate();
   const path = window.location.pathname;
   
-
-  return (
-    <Flex sx={sidebarStyles} align="center" justifyContent="space-between" direction="column">
-      <Box>
-        <Heading size="lg">Edutrack</Heading>
-        <Box mt="40px">
-          <Flex sx={path === "/home" ? activeButtonStyles : buttonStyles} align="center" onClick={() => navigate("/home")}> Dashboard</Flex>
-          <Flex sx={path === "/managestudents" ? activeButtonStyles : buttonStyles} align="center" onClick={() => navigate("/managestudents")}> Manage Students</Flex>
-          <Flex sx={path === "/assigntasks" ? activeButtonStyles : buttonStyles} align="center" onClick={() => navigate("/assigntasks")}> Assign Tasks</Flex>
-          <Flex sx={path === "/announcements" ? activeButtonStyles : buttonStyles} align="center" onClick={() => navigate("/announcements")}> Announcements</Flex>
-          <Flex sx={path === "/attendance" ? activeButtonStyles : buttonStyles} align="center" onClick={() => navigate("/attendance")}> Attendance</Flex>
+  if(props.isTeacher) {
+    return (
+      <Flex sx={sidebarStyles} align="center" justifyContent="space-between" direction="column">
+        <Box>
+          <Heading size="lg">Edutrack</Heading>
+          <Box mt="40px">
+            <Flex sx={path === "/home" ? activeButtonStyles : buttonStyles} align="center" onClick={() => navigate("/home")}> Dashboard</Flex>
+            <Flex sx={path === "/managestudents" ? activeButtonStyles : buttonStyles} align="center" onClick={() => navigate("/managestudents")}> Manage Students</Flex>
+            <Flex sx={path === "/assigntasks" ? activeButtonStyles : buttonStyles} align="center" onClick={() => navigate("/assigntasks")}> Assign Tasks</Flex>
+            <Flex sx={path === "/announcements" ? activeButtonStyles : buttonStyles} align="center" onClick={() => navigate("/announcements")}> Announcements</Flex>
+            <Flex sx={path === "/attendance" ? activeButtonStyles : buttonStyles} align="center" onClick={() => navigate("/attendance")}> Attendance</Flex>
+          </Box>
         </Box>
-      </Box>
-      <Box>
-        <Flex sx={buttonStyles} align="center"> Notifications</Flex>
-        <Flex sx={buttonStyles} align="center"> About</Flex>
-      </Box>
-    </Flex>
-  )
+        <Box>
+          <Flex sx={buttonStyles} align="center"> Notifications</Flex>
+          <Flex sx={buttonStyles} align="center"> About</Flex>
+        </Box>
+      </Flex>
+    )
+  } else {
+    return (
+      <Flex sx={sidebarStyles} align="center" justifyContent="space-between" direction="column">
+        <Box>
+          <Heading size="lg">Edutrack</Heading>
+          <Box mt="40px">
+            <Flex sx={path === "/home" ? activeButtonStyles : buttonStyles} align="center" onClick={() => navigate("/home")}> Dashboard</Flex>
+            <Flex sx={path === "/assignments" ? activeButtonStyles : buttonStyles} align="center" onClick={() => navigate("/assignments")}>Assignments</Flex>
+            <Flex sx={path === "/announcements" ? activeButtonStyles : buttonStyles} align="center" onClick={() => navigate("/announcements")}> Announcements</Flex>
+            <Flex sx={path === "/attendance" ? activeButtonStyles : buttonStyles} align="center" onClick={() => navigate("/attendance")}> Attendance</Flex>
+          </Box>
+        </Box>
+        <Box>
+          <Flex sx={buttonStyles} align="center"> Notifications</Flex>
+          <Flex sx={buttonStyles} align="center"> About</Flex>
+        </Box>
+      </Flex>
+    )
+  }
 }
 
 export default LeftBar
