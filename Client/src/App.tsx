@@ -14,12 +14,14 @@ function App() {
   return (
     <div>
       <Routes>
-
           <Route path="/" element={<LandingPage />} />
           <Route path="/home" element={<Dasboard />} />
+          <Route path="/managestudents" element={<AssignTasks />} />
           <Route path="/assigntasks" element={<AssignTasks />} />
           <Route path="/announcements" element={<PostingAnnouncements />} />
 
+          <Route path="/announcements" element={<AssignTasks />} />
+          <Route path="/attendance" element={<AssignTasks />} />
       </Routes>
     </div>
   );
