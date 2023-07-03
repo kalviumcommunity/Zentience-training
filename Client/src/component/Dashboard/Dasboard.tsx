@@ -4,10 +4,14 @@ import SimpleSidebar from '../SideBar/LeftBar'
 import { Box, Container, GridItem, Heading, SimpleGrid, Text } from '@chakra-ui/react'
 import LeftBar from '../SideBar/LeftBar'
 
-function Dasboard() {
+type DashboardProps = {
+  isTeacher: boolean
+}
+
+function Dasboard(props: DashboardProps) {
   return (
     <div className='dashboard'>
-      <LeftBar />
+      <LeftBar isTeacher={props.isTeacher} />
       <RightBar />
       <Container m="0 220px">
         <Heading mt="50px">Dashboard</Heading>

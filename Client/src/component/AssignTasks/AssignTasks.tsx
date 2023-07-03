@@ -4,7 +4,11 @@ import RightBar from '../SideBar/RightBar'
 import { Box, Container, Flex, Grid, Heading, Text, Wrap, WrapItem } from '@chakra-ui/react'
 import TaskCard from './TaskCard'
 
-function AssignTasks() {
+type AssignTasksProps = {
+    isTeacher: boolean
+}
+
+function AssignTasks(props: AssignTasksProps) {
     const addButtonStyles = {
         height: "60px",
         width: "60px",
@@ -23,7 +27,7 @@ function AssignTasks() {
 
   return (
     <div className='assigntasks'>
-      <LeftBar />
+      <LeftBar isTeacher={props.isTeacher} />
       <RightBar />
       <Container m="50px 0px 0 220px">
         <Heading size="md" m="0 0 20px">Active assignments</Heading>
