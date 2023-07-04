@@ -14,11 +14,13 @@ interface StudentStore {
   addstudent:(student:Student) =>void;
   resetForm:() => void;
   Name: string;
-  RollNo: string;
+  Rollno: number;
   Class: string;
+  currentElementId:number;
   setName: (Name:string) => void;
-  setRollNo: (RollNo:string) => void;
+  setRollno: (Rollno:number) => void;
   setClass: (Class:string)=>void,
+  setcurrentElementId:(currentElementId:number)=> void;
   setcandidate: (candidates: Student[]) => void;
 }
 
@@ -27,11 +29,13 @@ const useStudentStore = create<StudentStore>((set) => ({
   students: [],
   candidates:[],
   Name:'',
-  RollNo:'',
+  Rollno:0,
   Class:'',
+  currentElementId:0,
   setName:(Name) => set({Name}),
-  setRollNo:(RollNo)=> set({RollNo}),
+  setRollno:(Rollno)=> set({Rollno}),
   setClass:(Class)=> set({Class}),
+  setcurrentElementId:(currentElementId)=>set({currentElementId}),
   addstudent:(student)=>
   set((state)=>({
     students:[...state.students,student]
