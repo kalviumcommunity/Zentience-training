@@ -10,21 +10,48 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { useAuthStore } from "./AuthStore";
+import useAuthStore  from "./AuthStore";
 
 function StudentLogin() {
-  const { username, password, setUsername, setPassword } = useAuthStore();
+  const { username, password, error, setUsername, setPassword, setError } =
+    useAuthStore();
 
   const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(e.target.value);
+    setError(""); 
   };
 
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
+    setError(""); 
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (username.trim() === "") {
+      setError("Username is required");
+      return;
+    }
+
+    if (!/^[a-zA-Z0-9]+$/.test(username)) {
+      setError("Username must contain only letters and numbers");
+      return;
+    }
+    if (password.trim() === "") {
+      setError("Password is required");
+      return;
+    }
+
+    if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/.test(password)) {
+      setError(
+        "Password must be at least 8 characters long and contain at least one lowercase letter, one uppercase letter, and one digit"
+      );
+      return;
+    }
+
+    setError("");
+
     console.log("Username:", username);
     console.log("Password:", password);
   };
@@ -82,6 +109,7 @@ function StudentLogin() {
                   />
                 </FormLabel>
               </FormControl>
+              {error && <p>{error}</p>}
               <Button
                 bg={"blue.900"}
                 color={"white"}
