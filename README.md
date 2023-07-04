@@ -18,3 +18,8 @@ EduTrack is a platform that provides a user-friendly interface that allows teach
 - NodeJS
 - NestJS
 - MongoDB
+
+packages to be installed
+
+1- npm install -g json-server 
+2- npm install concurrently --save-dev 

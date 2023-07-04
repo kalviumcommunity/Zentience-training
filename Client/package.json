@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@auth0/auth0-react": "^2.1.1",
     "@chakra-ui/react": "^2.7.1",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
@@ -25,7 +26,8 @@
     "zustand": "^4.3.8"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "concurrently \"npm run json-server\" \"react-scripts start\"",
+    "json-server": "json-server --watch db.json --port 3001",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
