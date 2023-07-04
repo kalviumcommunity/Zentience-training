@@ -1,3 +1,4 @@
+
 import React from 'react';
 
 import { Route, Routes } from 'react-router-dom';
@@ -9,11 +10,11 @@ import AssignTasks from './component/AssignTasks/AssignTasks';
 import PostingAnnouncements from './component/Announcements/PostingAnnouncements';
 
 
-
 function App() {
   return (
     <div>
       <Routes>
+
           <Route path="/" element={<LandingPage />} />
           <Route path="/home" element={<Dasboard />} />
           <Route path="/managestudents" element={<AssignTasks />} />
@@ -22,10 +23,10 @@ function App() {
 
           <Route path="/announcements" element={<AssignTasks />} />
           <Route path="/attendance" element={<AssignTasks />} />
+
       </Routes>
     </div>
   );
 }
-
 
 export default App;
