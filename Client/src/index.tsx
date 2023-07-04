@@ -13,9 +13,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <ChakraProvider>
     <BrowserRouter>
-      {/* <Auth0ProviderWithNavigate> */}
+      <Auth0ProviderWithNavigate>
         <App />
-      {/* </Auth0ProviderWithNavigate> */}
+      </Auth0ProviderWithNavigate>
     </BrowserRouter>
   </ChakraProvider>
 );

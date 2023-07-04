@@ -56,27 +56,7 @@ const ManageStudent: React.FC = () => {
  
 
   
-  // const studentClassFilter = (e: any) => {
-  //   const selectedClass = e.target.value;
-  //   // setFilteredData(students)
-  //   setclas(selectedClass);
-  //   if (selectedClass !== '') {
-  //     const data = students.filter((item: Student) => item.Class === selectedClass);
-  //     setFilteredData(data);
-  //   } else {
-  //     setFilteredData(students);
-  //   }
-  // };
 
-  // const handleform=(e:any)=>{
-  //   selecteditstudent(e);
-  //   const formElement = document.querySelector('.form') as HTMLElement;
-  //   if (formElement.style.display === 'none') {
-  //     formElement.style.display = 'flex';
-  //   } else {
-  //     formElement.style.display = 'none';
-  //   }
-  // }
 
 
 
@@ -105,32 +85,7 @@ const ManageStudent: React.FC = () => {
          <BsPlusCircleFill/>        
     </Box>
 
-      {/* <Box display={'none'} className='form' position="fixed" top="0" left="0" right="0" bottom="0"  textAlign={'center'} justifyContent="center" alignItems="center">
-    
-      <Box
-        position="absolute"
-        top="0"
-        left="0"
-        right="0"
-        bottom="0"
-        backgroundColor="rgba(0, 0, 0, 0.4)" // Adjust the background color and opacity as needed
-        backdropFilter="blur(8px)" // Adjust the blur intensity as needed
-      />
-      <Box width="300px" bg="white" p={4} borderRadius="md" boxShadow="md" zIndex="10">
-        <FormControl>
-          <FormLabel htmlFor="name">Name</FormLabel>
-          <Input onChange={(e)=>updatestudentname(e.target.value)} type="text" id="name" placeholder="Type student name..." />
-        </FormControl>
-        <FormControl mt={4}>
-          <FormLabel htmlFor="rollNo">Roll No</FormLabel>
-          <Input onChange={(e)=>updaterollno(parseFloat(e.target.value))} type="text" id="rollNo" placeholder="Type roll number..." />
-        </FormControl>
-        <Button type={'submit'} onClick={()=>handleEditStudent(editstudent,studentname,rollno)} mt={4} colorScheme="blue">
-          Submit
-        </Button>
-      </Box>
-    </Box> */}
-
+      
         {
         candidates.length>0?
         candidates.map((dummy) => (
