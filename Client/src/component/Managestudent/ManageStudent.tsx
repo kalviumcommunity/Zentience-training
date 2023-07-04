@@ -14,6 +14,7 @@ interface Student {
   Name: string;
   Rollno: number;
   Class: string;
+  id:number;
 }
 
 const ManageStudent: React.FC = () => {
@@ -47,7 +48,24 @@ const ManageStudent: React.FC = () => {
  
 
 
-
+  const deletestudent = (id: number) => {
+    const confirmed = window.confirm("Are you sure you want to delete it?");
+    if (confirmed) {
+      fetch(`http://localhost:3001/studentData/${id}`, {
+        method: 'DELETE',
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          const filtered = candidates.filter((item: Student) => item.id !== id);
+          setcandidate(filtered);
+          console.log("Student data is deleted");
+        })
+        .catch((error) => {
+          console.error('Error while deleting students:', error);
+        });
+    }
+  };
+  
 
 
 
@@ -88,7 +106,7 @@ const ManageStudent: React.FC = () => {
       
         {
         candidates.length>0?
-        candidates.map((dummy) => (
+        candidates.map((dummy,index) => (
           <Flex
             key={dummy.number}
             textAlign="center"
@@ -99,7 +117,7 @@ const ManageStudent: React.FC = () => {
             h="4rem"
           >
             <Flex >
-                  <Flex>{dummy.number}</Flex>
+                  <Flex>{index+1}</Flex>
                   <Flex ml={'2rem'} >
                     <Image h={'2rem'} borderRadius={'5rem'} w={'3rem'} src={"https://banner2.cleanpng.com/20180913/bqs/kisspng-clip-art-student-computer-icons-school-illustratio-5b9af2b9283992.3985997515368813371648.jpg"} />
                     </Flex>
@@ -111,7 +129,7 @@ const ManageStudent: React.FC = () => {
                 <MdOutlineModeEdit   />
               </Flex>
               <Flex mr="2rem">
-                <RiDeleteBinLine color='red'  />
+                <RiDeleteBinLine color='red' onClick={()=>deletestudent(dummy.id)}  />
               </Flex>
             </Flex>
           </Flex>
