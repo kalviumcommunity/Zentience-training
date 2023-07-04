@@ -7,6 +7,9 @@ interface Student {
   Class: string;
 }
 
+
+
+
 interface StudentStore {
   students: Student[];
   deleteStudent: (rollNo: number) => void;
