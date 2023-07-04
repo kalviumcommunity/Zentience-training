@@ -3,14 +3,8 @@ import React from 'react';
 
 import { Route, Routes } from 'react-router-dom';
 import Dasboard from './component/Dashboard/Dasboard';
-
-import SimpleSidebar from './component/SideBar/LeftBar';
-import LandingPage from './component/LandingPage/LandingPage';
-import AssignTasks from './component/AssignTasks/AssignTasks';
 import PostingAnnouncements from './component/Announcements/PostingAnnouncements';
 import ManageStudent from './component/Managestudent/ManageStudent';
-
-import SimpleSidebar from "./component/SideBar/LeftBar";
 import LandingPage from "./component/LandingPage/LandingPage";
 import AssignTasks from "./component/AssignTasks/AssignTasks";
 
@@ -21,9 +15,9 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/home" element={<Dasboard />} />
-        <Route path="/managestudents" element={<AssignTasks />} />
+        <Route path="/managestudents" element={<ManageStudent />} />
         <Route path="/assigntasks" element={<AssignTasks />} />
-        <Route path="/announcements" element={<AssignTasks />} />
+        <Route path="/announcements" element={<PostingAnnouncements />} />
         <Route path="/attendance" element={<AssignTasks />} />
       </Routes>
     </div>
