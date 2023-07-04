@@ -22,12 +22,12 @@ const ManageStudent: React.FC = () => {
   const {Name,RollNo,setName,setRollNo,resetForm,Class,setClass,candidates,setcandidate} = useStudentStore();
 
 
+  const link= process.env.REACT_APP_SERVER_LINK;
 
 
-
-
+  console.log(link)
   const selectstudent = (e:any) => {
-    fetch('http://localhost:3001/studentData', {
+    fetch(`${link}/studentData`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -51,7 +51,7 @@ const ManageStudent: React.FC = () => {
   const deletestudent = (id: number) => {
     const confirmed = window.confirm("Are you sure you want to delete it?");
     if (confirmed) {
-      fetch(`http://localhost:3001/studentData/${id}`, {
+      fetch(`${link}/studentData/${id}`, {
         method: 'DELETE',
       })
         .then((response) => response.json())
