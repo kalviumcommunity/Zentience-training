@@ -5,6 +5,7 @@ interface Student {
   Name: string;
   Rollno: number;
   Class: string;
+  id:number;
 }
 
 interface StudentStore {
