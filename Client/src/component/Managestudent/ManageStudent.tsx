@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { Flex, Box, Image,IconButton, FormControl, FormLabel, Input, Button, Center } from '@chakra-ui/react';
 import { MdOutlineModeEdit } from 'react-icons/md';
 import { RiDeleteBinLine } from 'react-icons/ri';
@@ -11,7 +11,6 @@ import useStudentStore from './StudentStore';
 
 interface Student {
   number: number;
-  Image: string;
   Name: string;
   Rollno: number;
   Class: string;
@@ -19,82 +18,67 @@ interface Student {
 
 const ManageStudent: React.FC = () => {
 
-  const [filteredData, setFilteredData] = useState<Student[]>([]);
-  const [clas,setclas] = useState('');
-  const [studentname,updatestudentname] = useState('');
-  const [rollno,updaterollno] = useState(0);
-  const [editstudent,selecteditstudent] = useState(0);
-  const [newstudentname,setnewstudentname] = useState('');
-  const [newstudentrollno,setnewstudentrollno] = useState(0);
-  const [newstudentclass,setnewstudentclass] = useState('');
+  const {Name,RollNo,setName,setRollNo,resetForm,Class,setClass,candidates,setcandidate} = useStudentStore();
 
 
-  const students = useStudentStore((state:any) => state.students);
-  const deleteStudent = useStudentStore((state:any) => state.deleteStudent);
-  const handleDeleteStudent = (studentId: number) => {
-    deleteStudent(studentId);
-    const data=students.filter((student:any) => student.Rollno !== studentId && student.Class === clas );
-    setFilteredData(data);
 
+
+
+
+  const selectstudent = (e:any) => {
+    fetch('http://localhost:3001/studentData', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        const filtered=data.filter((item: Student) => item.Class === e.target.value);
+        setcandidate(filtered);
+        resetForm();
+      })
+      .catch((error) => {
+        console.error('Error retrieving students:', error);
+      });
   };
+  
 
-  console.log(students)
-
-  const editStudent = useStudentStore((state) => state.editStudent);
-  const addStudent = useStudentStore((state) => state.addStudent);
-  const handleAddStudent = () => {
-    const newStudent = {
-      number: 11,
-      Name:newstudentname,
-      Rollno: newstudentrollno,
-      Class: newstudentclass,
-    };
-
-    addStudent(newStudent);
-
-  };
-
-  const handleEditStudent = (rollNo: number, name: string, rollNoValue: number) => {
+ 
 
 
-    editStudent(rollNo, { Name: name, Rollno: rollNoValue });
-    const updatedData = students.map((student:any) =>
-    student.Rollno === rollNo ? { ...student, Name: name, Rollno: rollNoValue } : student
-  );
-  const data=updatedData.filter((student:any) => student.Class === clas );
-  setFilteredData(data);
 
 
-    const formElement = document.querySelector('.form') as HTMLElement;
-    if (formElement.style.display === 'none') {
-      formElement.style.display = 'flex';
-    } else {
-      formElement.style.display = 'none';
-    }
-  };
+
+
+
+
+ 
 
   
-  const studentClassFilter = (e: any) => {
-    const selectedClass = e.target.value;
-    // setFilteredData(students)
-    setclas(selectedClass);
-    if (selectedClass !== '') {
-      const data = students.filter((item: Student) => item.Class === selectedClass);
-      setFilteredData(data);
-    } else {
-      setFilteredData(students);
-    }
-  };
+  // const studentClassFilter = (e: any) => {
+  //   const selectedClass = e.target.value;
+  //   // setFilteredData(students)
+  //   setclas(selectedClass);
+  //   if (selectedClass !== '') {
+  //     const data = students.filter((item: Student) => item.Class === selectedClass);
+  //     setFilteredData(data);
+  //   } else {
+  //     setFilteredData(students);
+  //   }
+  // };
 
-  const handleform=(e:any)=>{
-    selecteditstudent(e);
-    const formElement = document.querySelector('.form') as HTMLElement;
-    if (formElement.style.display === 'none') {
-      formElement.style.display = 'flex';
-    } else {
-      formElement.style.display = 'none';
-    }
-  }
+  // const handleform=(e:any)=>{
+  //   selecteditstudent(e);
+  //   const formElement = document.querySelector('.form') as HTMLElement;
+  //   if (formElement.style.display === 'none') {
+  //     formElement.style.display = 'flex';
+  //   } else {
+  //     formElement.style.display = 'none';
+  //   }
+  // }
+
+
 
   return (
     <div>
@@ -107,7 +91,7 @@ const ManageStudent: React.FC = () => {
           </Box>
 
           <Box mr="2rem" fontSize="1rem">
-            <select onChange={studentClassFilter}>
+            <select onChange={(e)=>selectstudent(e)} >
               <option>Select Class</option>
               <option>Class 7</option>
               <option>Class 8</option>
@@ -121,8 +105,8 @@ const ManageStudent: React.FC = () => {
          <BsPlusCircleFill/>        
     </Box>
 
-      <Box display={'none'} className='form' position="fixed" top="0" left="0" right="0" bottom="0"  textAlign={'center'} justifyContent="center" alignItems="center">
-      {/* Background */}
+      {/* <Box display={'none'} className='form' position="fixed" top="0" left="0" right="0" bottom="0"  textAlign={'center'} justifyContent="center" alignItems="center">
+    
       <Box
         position="absolute"
         top="0"
@@ -145,11 +129,11 @@ const ManageStudent: React.FC = () => {
           Submit
         </Button>
       </Box>
-    </Box>
+    </Box> */}
 
         {
-        filteredData.length>0?
-        filteredData.map((dummy) => (
+        candidates.length>0?
+        candidates.map((dummy) => (
           <Flex
             key={dummy.number}
             textAlign="center"
@@ -169,12 +153,10 @@ const ManageStudent: React.FC = () => {
             </Flex>
             <Flex>
               <Flex mr="2rem">
-                <MdOutlineModeEdit onClick={()=>{
-                handleform(dummy.Rollno)
-                }}  />
+                <MdOutlineModeEdit   />
               </Flex>
               <Flex mr="2rem">
-                <RiDeleteBinLine color='red' onClick={() => handleDeleteStudent(dummy.Rollno)} />
+                <RiDeleteBinLine color='red'  />
               </Flex>
             </Flex>
           </Flex>
