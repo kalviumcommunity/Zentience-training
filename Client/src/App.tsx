@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 
 import { Route, Routes } from 'react-router-dom';
@@ -9,7 +10,7 @@ import AssignTasks from './component/AssignTasks/AssignTasks';
 import PostingAnnouncements from './component/Announcements/PostingAnnouncements';
 import ManageStudent from './component/Managestudent/ManageStudent';
 import StudentLogin from './component/StudentLogin/StudentLogin';
-import TeacherLogin from './component/TeacherLogin/TeacherLogin';
+
 
 
 
@@ -21,7 +22,7 @@ function App() {
       <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/studentlogin" element={<StudentLogin />} />
-          <Route path="/teacherlogin" element={<TeacherLogin />} />
+          {/* <Route path="/teacherlogin" element={<TeacherLogin />} /> */}
 
           <Route path="/home" element={<Dasboard isTeacher={isTeacher} />} />
           <Route path="/managestudents" element={<ManageStudent />} />
@@ -29,13 +30,13 @@ function App() {
           <Route path="/announcements" element={<PostingAnnouncements isTeacher={isTeacher} />} />
           <Route path="/attendance" element={<AssignTasks isTeacher={isTeacher} />} />
       </Routes>
-    );
+    )
   } else {
     return (
       <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/studentlogin" element={<StudentLogin />} />
-          <Route path="/teacherlogin" element={<TeacherLogin />} />
+          {/* <Route path="/teacherlogin" element={<TeacherLogin />} /> */}
 
           <Route path="/home" element={<Dasboard isTeacher={isTeacher} />} />
           <Route path="/announcements" element={<PostingAnnouncements isTeacher={isTeacher} />} />
@@ -44,6 +45,5 @@ function App() {
     )
   }
 }
-
 
 export default App;

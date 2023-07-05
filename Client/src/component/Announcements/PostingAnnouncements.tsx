@@ -21,8 +21,24 @@ function PostingAnnouncements(props: PostingAnnouncementsProps) {
   };
 
   const handlePost = () => {
-    console.log('Title:', title);
-    console.log('Description:', description);
+    const announcementData = { title, description };
+
+    fetch('http://localhost:3001/announcements', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(announcementData),
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Announcement posted successfully:', data);
+        setTitle('');
+        setDescription('');
+      })
+      .catch(error => {
+        console.error('Error posting announcement:', error);
+      });
     resetForm();
   };
 
