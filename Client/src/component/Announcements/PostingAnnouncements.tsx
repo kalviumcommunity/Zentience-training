@@ -3,6 +3,7 @@ import React from 'react';
 import { Container, Heading, Text, Select, Input, Textarea, Button, Flex } from '@chakra-ui/react';
 import LeftBar from '../SideBar/LeftBar';
 import useAnnouncementStore from './AnnouncementStore';
+import RightBar from '../SideBar/RightBar';
 
 type PostingAnnouncementsProps = {
   isTeacher: boolean
@@ -28,6 +29,7 @@ function PostingAnnouncements(props: PostingAnnouncementsProps) {
   return (
     <div className='announcements'>
       <LeftBar isTeacher={props.isTeacher} />
+      <RightBar />
       <Container maxW="1190px" ml="170px">
         <Flex flexDirection="column" alignItems="flex-end">
           <Select fontWeight='700' width='229px' placeholder='Select Class' marginTop ="25px" alignSelf="flex-end">
