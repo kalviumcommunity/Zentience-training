@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react';
-import { Flex, Box, Image,IconButton, FormControl, FormLabel, Input, Button, Center } from '@chakra-ui/react';
+import { Flex, Box,Text, Image,IconButton, FormControl, FormLabel, Input, Button, Center } from '@chakra-ui/react';
 import { MdOutlineModeEdit } from 'react-icons/md';
 import { RiDeleteBinLine } from 'react-icons/ri';
 import { BsPlusCircleFill } from 'react-icons/bs';
 import LeftBar from '../SideBar/LeftBar';
 import RightBar from '../SideBar/RightBar';
 import useStudentStore from './StudentStore';
-
 
 
 interface Student {
@@ -21,6 +20,21 @@ const ManageStudent: React.FC = () => {
 
   const {Name,Rollno,setName,setRollno,resetForm,Class,setClass,candidates,setcandidate,currentElementId,setcurrentElementId} = useStudentStore();
 
+  const addButtonStyles = {
+    height: "60px",
+    width: "60px",
+    position: "fixed",
+    right: "330px",
+    bottom: "30px",
+    justifyContent: "center",
+    align: "center",
+    borderRadius: "50%",
+    fontSize:"30px",
+    fontWeight:"600",
+    bg: "#14274E",
+    textColor: "white",
+    cursor: "pointer"
+}
 
   const link= process.env.REACT_APP_SERVER_LINK;
 
@@ -112,9 +126,43 @@ const ManageStudent: React.FC = () => {
   };
   
 
+  const handleaddstudentform=()=>{
+    const formElement = document.querySelector('.addstudent') as HTMLElement;
+    if (formElement.style.display === 'none') {
+      formElement.style.display = 'flex';
+    } else {
+      formElement.style.display = 'none';
+    }
+  }
 
+  const handleaddstudent=()=>{
+    const studentData = { Name, Rollno,Class };
 
-
+    fetch(`${link}/studentData`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(studentData),
+    })
+      .then(response => response.json())
+      .then(data => {
+        setName('');
+        setRollno(0);
+        // setClass('');
+        selectstudent(Class);
+        const formElement = document.querySelector('.addstudent') as HTMLElement;
+        if (formElement.style.display === 'none') {
+          formElement.style.display = 'flex';
+        } else {
+          formElement.style.display = 'none';
+        }
+      })
+      .catch(error => {
+        console.error('Error while updating student data:', error);
+      });
+    resetForm();
+  }
 
  
 
@@ -134,7 +182,7 @@ const ManageStudent: React.FC = () => {
           </Box>
 
           <Box mr="2rem" fontSize="1rem">
-            <select onChange={(e)=>{selectstudent(e.target.value);setClass(e.target.value)}} >
+            <select value={Class} onChange={(e)=>{selectstudent(e.target.value);setClass(e.target.value)}} >
               <option>Select Class</option>
               <option>Class 7</option>
               <option>Class 8</option>
@@ -179,13 +227,46 @@ const ManageStudent: React.FC = () => {
 
 
 
-
-
-        <Box position="fixed" bottom="2.5rem" right="22rem" zIndex="999">
-      
-         <BsPlusCircleFill/>        
+    
+    <Box display={'none'} className='addstudent' position="fixed" top="0" left="0" right="0" bottom="0"  textAlign={'center'} justifyContent="center" alignItems="center">
+    
+    <Box
+      position="absolute"
+      top="0"
+      left="0"
+      right="0"
+      bottom="0"
+      backgroundColor="rgba(0, 0, 0, 0.4)" // Adjust the background color and opacity as needed
+      backdropFilter="blur(8px)" // Adjust the blur intensity as needed
+    />
+    <Box width="300px" bg="white" p={4} borderRadius="md" boxShadow="md" zIndex="10">
+      <FormControl>
+        <FormLabel htmlFor="name">Name</FormLabel>
+        <Input value={Name} onChange={(e)=>handlestudentname(e)} type="text" id="name" placeholder="Type student name..." />
+      </FormControl>
+      <FormControl mt={4}>
+        <FormLabel htmlFor="rollNo">Roll No</FormLabel>
+        <Input value={Rollno} onChange={(e)=>handlestudentrollno((e))} type="number" id="rollNo" placeholder="Type roll number..." />
+      </FormControl>
+      <FormControl mt={4}>
+        <FormLabel htmlFor="class">Class</FormLabel>
+        <Input value={Class} onChange={(e)=>setClass(e.target.value)} type="text" id="rollNo" placeholder="Enter class..." />
+      </FormControl>
+      <Button type={'submit'} onClick={()=>handleaddstudent()}  mt={4} colorScheme="blue">
+        Submit
+      </Button>
     </Box>
+  </Box> 
 
+
+
+
+
+
+
+    <Flex  onClick={()=>handleaddstudentform()} sx={addButtonStyles}>
+            <Text pt={'5px'} >+</Text>
+        </Flex>
       
         {
         candidates.length>0?
