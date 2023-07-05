@@ -11,11 +11,11 @@ import PostingAnnouncements from './component/Announcements/PostingAnnouncements
 import ManageStudent from './component/Managestudent/ManageStudent';
 import StudentLogin from './component/StudentLogin/StudentLogin';
 
-
+import useUserStore from './store'
 
 
 function App() {
-  const [isTeacher, setIsTeacher] = useState(false);
+  const isTeacher = useUserStore((state) => state.isTeacher);
 
   if(isTeacher) {
     return (
@@ -24,11 +24,11 @@ function App() {
           <Route path="/studentlogin" element={<StudentLogin />} />
           {/* <Route path="/teacherlogin" element={<TeacherLogin />} /> */}
 
-          <Route path="/home" element={<Dasboard isTeacher={isTeacher} />} />
+          <Route path="/home" element={<Dasboard />} />
           <Route path="/managestudents" element={<ManageStudent />} />
-          <Route path="/assigntasks" element={<AssignTasks isTeacher={isTeacher} />} />
+          <Route path="/assigntasks" element={<AssignTasks />} />
           <Route path="/announcements" element={<PostingAnnouncements isTeacher={isTeacher} />} />
-          <Route path="/attendance" element={<AssignTasks isTeacher={isTeacher} />} />
+          <Route path="/attendance" element={<AssignTasks />} />
       </Routes>
     )
   } else {
@@ -38,9 +38,9 @@ function App() {
           <Route path="/studentlogin" element={<StudentLogin />} />
           {/* <Route path="/teacherlogin" element={<TeacherLogin />} /> */}
 
-          <Route path="/home" element={<Dasboard isTeacher={isTeacher} />} />
+          <Route path="/home" element={<Dasboard />} />
           <Route path="/announcements" element={<PostingAnnouncements isTeacher={isTeacher} />} />
-          <Route path="/attendance" element={<AssignTasks isTeacher={isTeacher} />} />
+          <Route path="/attendance" element={<AssignTasks />} />
       </Routes>
     )
   }

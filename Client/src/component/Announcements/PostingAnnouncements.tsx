@@ -44,7 +44,7 @@ function PostingAnnouncements(props: PostingAnnouncementsProps) {
 
   return (
     <div className='announcements'>
-      <LeftBar isTeacher={props.isTeacher} />
+      <LeftBar />
       <RightBar />
       <Container maxW="1190px" ml="170px">
         <Flex flexDirection="column" alignItems="flex-end">

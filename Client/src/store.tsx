@@ -1,9 +1,13 @@
-import { create } from "zustand"
+import {create} from 'zustand';
 
-interface User {
-    isTeacher: boolean
-}
+type userStoreState = {
+  isTeacher: boolean;
+  setIsTeacher: (value: boolean) => void;
+};
 
-export const useStore = create<User>((set) => ({
-    isTeacher: true
-}))
+const useUserStore = create<userStoreState>((set) => ({
+  isTeacher: true,
+  setIsTeacher: (value) => set((state) => ({ ...state, isTeacher: value })),
+}));
+
+export default useUserStore;

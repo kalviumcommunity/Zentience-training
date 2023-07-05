@@ -2,11 +2,11 @@ import { Box, Flex, Heading } from '@chakra-ui/react'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
-type LeftCardProps = {
-  isTeacher: boolean;
-}
+import useUserStore from '../../store'
 
-function LeftBar(props: LeftCardProps) {
+function LeftBar() {
+  const isTeacher = useUserStore((state) => state.isTeacher);
+
   const sidebarStyles = {
     h:"calc(100vh)",
     w:"200px",
@@ -48,7 +48,7 @@ function LeftBar(props: LeftCardProps) {
   const navigate = useNavigate();
   const path = window.location.pathname;
   
-  if(props.isTeacher) {
+  if(isTeacher) {
     return (
       <Flex sx={sidebarStyles} align="center" justifyContent="space-between" direction="column">
         <Box>
