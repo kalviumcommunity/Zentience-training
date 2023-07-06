@@ -6,7 +6,8 @@ import Dasboard from './component/Dashboard/Dasboard';
 import SimpleSidebar from './component/SideBar/LeftBar';
 import LandingPage from './component/LandingPage/LandingPage';
 import AssignTasks from './component/AssignTasks/AssignTasks';
-import PostingAnnouncements from './component/Announcements/PostingAnnouncements';
+import TeachersAnnouncements from './component/Announcements/TeachersAnnouncement';
+import StudentsAnnouncements from './component/Announcements/StudentsAnnouncements';
 
 
 
@@ -18,10 +19,8 @@ function App() {
           <Route path="/home" element={<Dasboard />} />
           <Route path="/managestudents" element={<AssignTasks />} />
           <Route path="/assigntasks" element={<AssignTasks />} />
-          <Route path="/announcements" element={<PostingAnnouncements />} />
-
-          <Route path="/announcements" element={<AssignTasks />} />
-          <Route path="/attendance" element={<AssignTasks />} />
+          <Route path="/teachersannouncements" element={<TeachersAnnouncements />} />
+          <Route path="/demo" element={<StudentsAnnouncements />} />
       </Routes>
     </div>
   );

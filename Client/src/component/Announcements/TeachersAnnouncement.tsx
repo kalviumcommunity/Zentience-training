@@ -3,8 +3,9 @@ import React from 'react';
 import { Container, Heading, Text, Select, Input, Textarea, Button, Flex } from '@chakra-ui/react';
 import LeftBar from '../SideBar/LeftBar';
 import useAnnouncementStore from './AnnouncementStore';
+import RightBar from '../SideBar/RightBar';
 
-function PostingAnnouncements() {
+function TeachersAnnouncements() {
   const { title, description, setTitle, setDescription, resetForm } = useAnnouncementStore();
 
   const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -83,9 +84,10 @@ function PostingAnnouncements() {
           </Button>
         </Flex>
       </Container>
+      <RightBar/>
     </div>
   );
 }
 
-export default PostingAnnouncements;
+export default TeachersAnnouncements;
 

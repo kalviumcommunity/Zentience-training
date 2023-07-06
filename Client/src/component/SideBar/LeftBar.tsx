@@ -54,7 +54,7 @@ function LeftBar() {
           <Flex sx={path === "/home" ? activeButtonStyles : buttonStyles} align="center" onClick={() => navigate("/home")}> Dashboard</Flex>
           <Flex sx={path === "/managestudents" ? activeButtonStyles : buttonStyles} align="center" onClick={() => navigate("/managestudents")}> Manage Students</Flex>
           <Flex sx={path === "/assigntasks" ? activeButtonStyles : buttonStyles} align="center" onClick={() => navigate("/assigntasks")}> Assign Tasks</Flex>
-          <Flex sx={path === "/announcements" ? activeButtonStyles : buttonStyles} align="center" onClick={() => navigate("/announcements")}> Announcements</Flex>
+          <Flex sx={path === "/teachersannouncements" ? activeButtonStyles : buttonStyles} align="center" onClick={() => navigate("/teachersannouncements")}> Announcements</Flex>
           <Flex sx={path === "/attendance" ? activeButtonStyles : buttonStyles} align="center" onClick={() => navigate("/attendance")}> Attendance</Flex>
         </Box>
       </Box>
