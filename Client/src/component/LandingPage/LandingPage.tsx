@@ -1,8 +1,11 @@
 import React from "react";
 import "./LandingPage.css"; // Import the CSS file for styling
 import { LoginButton } from "../TeacherLogin/TeacherLogin";
+import { useNavigate } from "react-router-dom";
 
 const LandingPage = () => {
+
+  const navigate = useNavigate();
   
   return (
     <div className="landing-page">
@@ -19,7 +22,7 @@ const LandingPage = () => {
           <p>Simplify Student Management with our Powerful System</p>
           <div className="buttons">
             <LoginButton/>
-            <button className="login-button">
+            <button className="login-button" onClick={() => {navigate("/studentlogin")}}>
               For Students
               <div>
                 <img
