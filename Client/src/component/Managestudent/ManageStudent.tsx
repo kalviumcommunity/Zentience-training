@@ -173,7 +173,7 @@ const ManageStudent: React.FC = () => {
 
   return (
     <div>
-      <LeftBar />
+      {/* <LeftBar isTeacher={props.isTeacher} /> */}
       <RightBar />
       <Box as="div" ml="13rem" height="100vh" mr="13rem">
         <Flex mb="2.5rem" alignItems="center" pt="2rem" justifyContent="space-between">

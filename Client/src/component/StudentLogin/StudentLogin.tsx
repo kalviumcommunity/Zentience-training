@@ -10,20 +10,51 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
-
-import { useForm } from "react-hook-form";
-
-interface FormData {
-  registrationId: string;
-  password: string;
-}
+import useAuthStore  from "./AuthStore";
 
 function StudentLogin() {
-  const { register, handleSubmit } = useForm<FormData>();
+  const { username, password, error, setUsername, setPassword, setError } =
+    useAuthStore();
 
-  const onSubmit = handleSubmit(({ registrationId, password }) => {
-    console.log(registrationId, password);
-  });
+  const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUsername(e.target.value);
+    setError(""); 
+  };
+
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+    setError(""); 
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (username.trim() === "") {
+      setError("Username is required");
+      return;
+    }
+
+    if (!/^[a-zA-Z0-9]+$/.test(username)) {
+      setError("Username must contain only letters and numbers");
+      return;
+    }
+    if (password.trim() === "") {
+      setError("Password is required");
+      return;
+    }
+
+    if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/.test(password)) {
+      setError(
+        "Password must be at least 8 characters long and contain at least one lowercase letter, one uppercase letter, and one digit"
+      );
+      return;
+    }
+
+    setError("");
+
+    console.log("Username:", username);
+    console.log("Password:", password);
+  };
 
   return (
     <Flex
@@ -51,19 +82,17 @@ function StudentLogin() {
         </Stack>
 
         <Box w="100vh" mt={69}>
-          <form onSubmit={onSubmit}>
+          <form onSubmit={handleSubmit}>
             <Stack spacing={4}>
               <FormControl>
                 <FormLabel>
                   <Input
-                    {...register("registrationId", {
-                      required: true,
-                      minLength: 10,
-                      maxLength: 12,
-                    })} // Update the ref assignment
+                    type="text"
+                    id="username"
+                    value={username}
+                    onChange={handleUsernameChange}
                     name="registrationId"
                     placeholder="Registration Id"
-                    type="text"
                   />
                 </FormLabel>
               </FormControl>
@@ -71,17 +100,16 @@ function StudentLogin() {
               <FormControl>
                 <FormLabel>
                   <Input
-                    {...register("password", {
-                      required: true,
-                      minLength: 8,
-                      maxLength: 20,
-                    })} // Update the ref assignment
+                    type="password"
+                    id="password"
+                    value={password}
+                    onChange={handlePasswordChange}
                     name="password"
                     placeholder="Password"
-                    type="password"
                   />
                 </FormLabel>
               </FormControl>
+              {error && <p>{error}</p>}
               <Button
                 bg={"blue.900"}
                 color={"white"}
