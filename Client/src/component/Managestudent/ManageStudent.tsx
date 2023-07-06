@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
-import { Flex, Box,Text, Image,IconButton, FormControl, FormLabel, Input, Button, Center } from '@chakra-ui/react';
+import { Flex, Box,Text, Image, FormControl, FormLabel, Input, Button } from '@chakra-ui/react';
 import { MdOutlineModeEdit } from 'react-icons/md';
 import { RiDeleteBinLine } from 'react-icons/ri';
-import { BsPlusCircleFill } from 'react-icons/bs';
 import LeftBar from '../SideBar/LeftBar';
 import RightBar from '../SideBar/RightBar';
 import useStudentStore from './StudentStore';
@@ -173,7 +172,7 @@ const ManageStudent: React.FC = () => {
 
   return (
     <div>
-      {/* <LeftBar isTeacher={props.isTeacher} /> */}
+      <LeftBar />
       <RightBar />
       <Box as="div" ml="13rem" height="100vh" mr="13rem">
         <Flex mb="2.5rem" alignItems="center" pt="2rem" justifyContent="space-between">
