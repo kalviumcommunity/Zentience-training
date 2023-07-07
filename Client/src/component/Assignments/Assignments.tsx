@@ -2,25 +2,10 @@ import React from 'react'
 import LeftBar from '../SideBar/LeftBar'
 import RightBar from '../SideBar/RightBar'
 import { Box, Container, Flex, Grid, Heading, Text, Wrap, WrapItem } from '@chakra-ui/react'
-import TaskCard from './TaskCard'
+import TaskCard from '../AssignTasks/TaskCard'
 
 
-function AssignTasks() {
-    const addButtonStyles = {
-        height: "60px",
-        width: "60px",
-        position: "fixed",
-        right: "240px",
-        bottom: "30px",
-        justifyContent: "center",
-        align: "center",
-        borderRadius: "50%",
-        fontSize:"30px",
-        fontWeight:"600",
-        bg: "#14274E",
-        textColor: "white",
-        cursor: "pointer"
-    }
+function Assignments() {
 
   return (
     <div className='assigntasks'>
@@ -34,7 +19,7 @@ function AssignTasks() {
                     title="Lorem ipsum dolor sit amet"
                     desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit..."
                     date="Today"
-                    actionText="View Submissions"
+                    actionText="View"
                 />
 
                 <TaskCard
@@ -42,7 +27,7 @@ function AssignTasks() {
                     title="Lorem ipsum dolor sit amet"
                     desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit..."
                     date="Today"
-                    actionText="View Submissions"
+                    actionText="View"
                 />
 
                 <TaskCard
@@ -50,7 +35,7 @@ function AssignTasks() {
                     title="Lorem ipsum dolor sit amet"
                     desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit..."
                     date="Today"
-                    actionText="View Submissions"
+                    actionText="View"
                 />
 
                 <TaskCard
@@ -58,7 +43,7 @@ function AssignTasks() {
                     title="Lorem ipsum dolor sit amet"
                     desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit..."
                     date="Today"
-                    actionText="View Submissions"
+                    actionText="View"
                 />
             </Grid>
         <Heading size="md" m="20px 0">Previous assignments</Heading>
@@ -68,29 +53,26 @@ function AssignTasks() {
                     title="Lorem ipsum dolor sit amet"
                     desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit..."
                     date="10th June"
-                    actionText="View Submissions"
+                    actionText="View"
                 />
                 <TaskCard
                     isActive={false}
                     title="Lorem ipsum dolor sit amet"
                     desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit..."
                     date="10th June"
-                    actionText="View Submissions"
+                    actionText="View"
                 />
                 <TaskCard
                     isActive={false}
                     title="Lorem ipsum dolor sit amet"
                     desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit..."
                     date="10th June"
-                    actionText="View Submissions"
+                    actionText="View"
                 />
             </Grid>
-        <Flex sx={addButtonStyles}>
-            <Text>+</Text>
-        </Flex>
       </Container>
     </div>
   )
 }
 
-export default AssignTasks
+export default Assignments

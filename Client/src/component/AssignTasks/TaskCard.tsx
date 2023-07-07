@@ -4,8 +4,9 @@ import React from 'react'
 type TaskCardProps = {
     isActive: boolean,
     title: string,
-    desc: string
-    date: string
+    desc: string,
+    date: string,
+    actionText: string
 }
 
 function TaskCard(props: TaskCardProps) {
@@ -22,7 +23,7 @@ function TaskCard(props: TaskCardProps) {
             <Heading size="small" textColor="rgba(0, 0, 0, 0.6)" fontWeight='bold'>{props.title}</Heading>
             <Text size="small" textColor="rgba(0, 0, 0, 0.6)" fontWeight='medium' mt="10px">{props.desc}</Text>
             <Flex justifyContent="space-between" mt="20px">
-                <Text size="small" textColor="#14274E" fontWeight='bold' cursor="pointer">View Submissions</Text>
+                <Text size="small" textColor="#14274E" fontWeight='bold' cursor="pointer">{props.actionText}</Text>
                 <Text size="small" textColor="rgba(0, 0, 0, 0.3)" fontWeight='bold'>Due {props.date}</Text>
             </Flex>
         </Box>
@@ -33,7 +34,7 @@ function TaskCard(props: TaskCardProps) {
             <Heading size="small" textColor="rgba(0, 0, 0, 0.6)" fontWeight='bold'>{props.title}</Heading>
             <Text size="small" textColor="rgba(0, 0, 0, 0.6)" fontWeight='medium' mt="10px">{props.desc}</Text>
             <Flex justifyContent="space-between" mt="20px">
-                <Text size="small" textColor="#14274E" fontWeight='bold' cursor="pointer">View Submissions</Text>
+                <Text size="small" textColor="#14274E" fontWeight='bold' cursor="pointer">{props.actionText}</Text>
                 <Text size="small" textColor="rgba(0, 0, 0, 0.3)" fontWeight='bold'>Due {props.date}</Text>
             </Flex>
         </Box>
