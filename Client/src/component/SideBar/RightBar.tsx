@@ -66,7 +66,6 @@ function RightBar() {
         <Heading size="md" m="25px 0 30px">
           David Foster
         </Heading>
-        <img></img>
         <Flex sx={editProfileButton} align="center" justifyContent="center">
           {" "}
           Edit Profile
