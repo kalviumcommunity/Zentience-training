@@ -33,6 +33,8 @@ function RightBar() {
     height: "100px",
     borderRadius: "50%",
     bg: "#000000",
+    backgroundImage: "url('./assets/user1.png')",
+    backgroundSize: "cover"
   };
 
   const editProfileButton = {
@@ -64,6 +66,7 @@ function RightBar() {
         <Heading size="md" m="25px 0 30px">
           David Foster
         </Heading>
+        <img></img>
         <Flex sx={editProfileButton} align="center" justifyContent="center">
           {" "}
           Edit Profile
