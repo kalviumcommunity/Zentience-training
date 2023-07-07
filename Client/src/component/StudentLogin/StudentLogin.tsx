@@ -59,7 +59,7 @@ function StudentLogin() {
   return (
     <Flex
       width="100%"
-      height="100%"
+      height="100vh"
       direction="column"
       bg={useColorModeValue("gray.50", "gray.800")}
     >
