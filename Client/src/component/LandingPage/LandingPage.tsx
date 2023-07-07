@@ -10,7 +10,7 @@ const LandingPage = () => {
   return (
     <div className="landing-page">
       <div className="logo">
-        <img src="./assets/ipsum.png"></img>Logo ipsum
+        <img src="./assets/ipsum.png"></img>EduTrack
       </div>
       <div className="body">
         <div className="content">
