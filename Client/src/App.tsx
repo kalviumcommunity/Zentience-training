@@ -6,7 +6,6 @@ import PostingAnnouncements from "./component/Announcements/PostingAnnouncements
 import ManageStudent from "./component/Managestudent/ManageStudent";
 import StudentLogin from "./component/StudentLogin/StudentLogin";
 import useUserStore from "./store";
-import { AuthenticationGuard } from "./authentication-guard";
 
 function App() {
   const isTeacher = useUserStore((state) => state.isTeacher);
@@ -16,30 +15,14 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/studentlogin" element={<StudentLogin />} />
-        <Route
-          path="/home"
-          element={<AuthenticationGuard component={Dasboard} />}
-        />
-        <Route
-          path="/managestudents"
-          element={<AuthenticationGuard component={ManageStudent} />}
-        />
-        <Route
-          path="/assigntasks"
-          element={<AuthenticationGuard component={AssignTasks} />}
-        />
+        <Route path="/home" element={<Dasboard />} />
+        <Route path="/managestudents" element={<ManageStudent />} />
+        <Route path="/assigntasks" element={<AssignTasks />} />
         <Route
           path="/announcements"
-          element={
-            <AuthenticationGuard
-              component={() => <PostingAnnouncements isTeacher={isTeacher} />}
-            />
-          }
+          element={<PostingAnnouncements isTeacher={isTeacher} />}
         />
-        <Route
-          path="/attendance"
-          element={<AuthenticationGuard component={AssignTasks} />}
-        />
+        <Route path="/attendance" element={<AssignTasks />} />
       </Routes>
     );
   } else {
