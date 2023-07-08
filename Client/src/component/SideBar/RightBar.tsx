@@ -33,6 +33,8 @@ function RightBar() {
     height: "100px",
     borderRadius: "50%",
     bg: "#000000",
+    backgroundImage: "url('./assets/user1.png')",
+    backgroundSize: "cover"
   };
 
   const editProfileButton = {
