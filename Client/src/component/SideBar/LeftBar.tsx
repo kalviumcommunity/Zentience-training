@@ -2,7 +2,11 @@ import { Box, Flex, Heading } from '@chakra-ui/react'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
+import useUserStore from '../../store'
+
 function LeftBar() {
+  const isTeacher = useUserStore((state) => state.isTeacher);
+
   const sidebarStyles = {
     h:"calc(100vh)",
     w:"200px",
@@ -43,7 +47,6 @@ function LeftBar() {
 
   const navigate = useNavigate();
   const path = window.location.pathname;
-  console.log(path);
   
 
   return (

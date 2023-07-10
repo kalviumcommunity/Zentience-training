@@ -4,7 +4,12 @@ import SimpleSidebar from '../SideBar/LeftBar'
 import { Box, Container, GridItem, Heading, SimpleGrid, Text } from '@chakra-ui/react'
 import LeftBar from '../SideBar/LeftBar'
 
+import useUserStore from '../../store'
+
+
 function Dasboard() {
+  const isTeacher = useUserStore((state) => state.isTeacher);
+  console.log("isTeacher: ", isTeacher);
   return (
     <div className='dashboard'>
       <LeftBar />
