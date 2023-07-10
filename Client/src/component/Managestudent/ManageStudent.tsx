@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
-import { Flex, Box,Text, Image,IconButton, FormControl, FormLabel, Input, Button, Center } from '@chakra-ui/react';
+import { Flex, Box,Text, Image, FormControl, FormLabel, Input, Button } from '@chakra-ui/react';
 import { MdOutlineModeEdit } from 'react-icons/md';
 import { RiDeleteBinLine } from 'react-icons/ri';
 import { BsPlusCircleFill } from 'react-icons/bs';
+import { useTable } from "react-table";
 import LeftBar from '../SideBar/LeftBar';
 import RightBar from '../SideBar/RightBar';
 import useStudentStore from './StudentStore';
@@ -16,6 +17,8 @@ interface Student {
   id:number;
 }
 
+
+
 const ManageStudent: React.FC = () => {
 
   const {Name,Rollno,setName,setRollno,resetForm,Class,setClass,candidates,setcandidate,currentElementId,setcurrentElementId} = useStudentStore();
@@ -24,7 +27,7 @@ const ManageStudent: React.FC = () => {
     height: "60px",
     width: "60px",
     position: "fixed",
-    right: "330px",
+    right: "430px",
     bottom: "30px",
     justifyContent: "center",
     align: "center",
@@ -164,6 +167,56 @@ const ManageStudent: React.FC = () => {
     resetForm();
   }
 
+
+
+
+  
+ 
+  const columns: any[] = React.useMemo(
+    () => [
+      {
+        Header: '_',
+        accessor: (_:any, index:any) => index + 1,
+      },
+      {
+        Header: '',
+        accessor: 'Image',
+        Cell: () => (
+          <Flex ml={'-1rem'} >
+            <Image h={'2rem'} borderRadius={'5rem'} w={'3rem'} src={"https://banner2.cleanpng.com/20180913/bqs/kisspng-clip-art-student-computer-icons-school-illustratio-5b9af2b9283992.3985997515368813371648.jpg"} />
+          </Flex>
+        ),
+      },
+      {
+        Header: '',
+        accessor: 'Name',
+      },
+      {
+        Header: '',
+        accessor: 'Rollno',
+      },
+      {
+        Header: '',
+        accessor: 'actions',
+        Cell: ({ row }:{row:any}) => (
+          <Flex width={'40rem'} justifyContent={'flex-end'} >
+            <Flex mr="4rem">
+              <MdOutlineModeEdit onClick={() => handleform(row.original.id)} />
+            </Flex>
+            <Flex mr="4rem">
+              <RiDeleteBinLine color="red" onClick={() => deletestudent(row.original.id)} />
+            </Flex>
+          </Flex>
+        ),
+      },
+    ],
+    []
+  );
+
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable<Student>({
+    columns,
+    data: candidates,
+  });
  
 
   
@@ -173,7 +226,7 @@ const ManageStudent: React.FC = () => {
 
   return (
     <div>
-      {/* <LeftBar isTeacher={props.isTeacher} /> */}
+      <LeftBar />
       <RightBar />
       <Box as="div" ml="13rem" height="100vh" mr="13rem">
         <Flex mb="2.5rem" alignItems="center" pt="2rem" justifyContent="space-between">
@@ -193,6 +246,41 @@ const ManageStudent: React.FC = () => {
 
 
 
+
+        <Box as="div"  height="100vh" ml={'4rem'}  >
+      <table {...getTableProps()} style={{ width: '100%' }}>
+        <thead>
+          {headerGroups.map((headerGroup) => (
+            <tr {...headerGroup.getHeaderGroupProps()}>
+              {headerGroup.headers.map((column) => (
+                <th {...column.getHeaderProps()} style={{ padding: '1rem'}}>
+                  {column.render('Header')}
+                </th>
+              ))}
+            </tr>
+          ))}
+        </thead>
+        <tbody {...getTableBodyProps()}>
+          {rows.map((row) => {
+            prepareRow(row);
+            return (
+              <tr {...row.getRowProps()} >
+                {row.cells.map((cell) => (
+                  <td {...cell.getCellProps()} style={{ padding: '1rem',width:'6%'}}>
+                    {cell.render('Cell')}
+                  </td>
+                ))}
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+      {candidates.length === 0 && (
+        <Flex mt={'5rem'} fontSize={'2rem'} justifyContent={'center'}>
+          Please Select a class...
+        </Flex>
+      )}
+    </Box>
 
 
 
@@ -268,42 +356,7 @@ const ManageStudent: React.FC = () => {
             <Text pt={'5px'} >+</Text>
         </Flex>
       
-        {
-        candidates.length>0?
-        candidates.map((dummy,index) => (
-          <Flex
-            key={dummy.number}
-            textAlign="center"
-            _hover={{ border: '1px solid grey', borderRadius: '1rem' }}
-            alignItems="center"
-            justifyContent="space-between"
-            pl="2.5rem"
-            h="4rem"
-          >
-            <Flex >
-                  <Flex>{index+1}</Flex>
-                  <Flex ml={'2rem'} >
-                    <Image h={'2rem'} borderRadius={'5rem'} w={'3rem'} src={"https://banner2.cleanpng.com/20180913/bqs/kisspng-clip-art-student-computer-icons-school-illustratio-5b9af2b9283992.3985997515368813371648.jpg"} />
-                    </Flex>
-                  <Flex ml={'2rem'} minW={'8rem'} >{dummy.Name}</Flex>
-                  <Flex ml={'4rem'} >{dummy.Rollno}</Flex>
-            </Flex>
-            <Flex>
-              <Flex mr="2rem">
-                <MdOutlineModeEdit onClick={()=>handleform(dummy.id)}  />
-              </Flex>
-              <Flex mr="2rem">
-                <RiDeleteBinLine color='red' onClick={()=>deletestudent(dummy.id)}  />
-              </Flex>
-            </Flex>
-          </Flex>
-        ))
-        :
-        <Flex mt={'5rem'} fontSize={'2rem'} justifyContent={'center'}>
-          Please Select a class...
-        </Flex>
-      
-      }
+       
       </Box>
     </div>
   );

@@ -59,13 +59,13 @@ function StudentLogin() {
   return (
     <Flex
       width="100%"
-      height="100%"
+      height="100vh"
       direction="column"
       bg={useColorModeValue("gray.50", "gray.800")}
     >
       <Box display="Flex" alignItems="center" mt={69} ml={120}>
         <img src="./assets/ipsum.png"></img>{" "}
-        <Heading fontSize={"2xl"}>Eudtrack</Heading>
+        <Heading fontSize={"2xl"}>Edutrack</Heading>
       </Box>
 
       <Stack alignItems="center" mt={55}>

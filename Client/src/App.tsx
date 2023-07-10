@@ -16,7 +16,7 @@ import useUserStore from './store'
 function App() {
   const isTeacher = useUserStore((state) => state.isTeacher);
 
-  if(isTeacher) {
+  if (isTeacher) {
     return (
       <Routes>
           <Route path="/" element={<LandingPage />} />
@@ -26,7 +26,7 @@ function App() {
           <Route path="/teachersannouncements" element={<TeachersAnnouncements />} />
           <Route path="/studentannouncements" element={<StudentsAnnouncements />} />
       </Routes>
-    )
+    );
   }
   else {
     return (
