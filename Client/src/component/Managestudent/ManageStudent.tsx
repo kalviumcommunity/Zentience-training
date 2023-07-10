@@ -37,7 +37,7 @@ const ManageStudent: React.FC = () => {
     bg: "#14274E",
     textColor: "white",
     cursor: "pointer"
-}
+  }
 
   const link= process.env.REACT_APP_SERVER_LINK;
 
@@ -50,15 +50,17 @@ const ManageStudent: React.FC = () => {
   }
 
     const handlestudentupdate = () => {
-    const studentData = { Name, Rollno };
+      const studentData = { Name, Rollno };
+      
+      generateEmailAndPassword();
 
-    fetch(`${link}/studentData/${currentElementId}`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(studentData),
-    })
+      fetch(`${link}/studentData/${currentElementId}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(studentData),
+      })
       .then(response => response.json())
       .then(data => {
         setName('');
@@ -219,7 +221,18 @@ const ManageStudent: React.FC = () => {
   });
  
 
-  
+  const generateEmailAndPassword = () => {
+    let email = Name.trim().split(" ").join().toLowerCase() + (Math.random() * 100000).toString + "@xyz.com"
+    let length = 12,
+        charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
+        pass = "";
+    for (let i = 0, n = charset.length; i < length; ++i) {
+        pass += charset.charAt(Math.floor(Math.random() * n));
+    }
+    console.log([email, pass]);
+    
+    return [email, pass]
+  }
 
 
 
@@ -229,63 +242,63 @@ const ManageStudent: React.FC = () => {
       <LeftBar />
       <RightBar />
       <Box as="div" ml="13rem" height="100vh" mr="13rem">
-        <Flex mb="2.5rem" alignItems="center" pt="2rem" justifyContent="space-between">
-          <Box ml="2rem" fontSize="2rem">
-            Good Morning lorem!
-          </Box>
+      <Flex mb="2.5rem" alignItems="center" pt="2rem" justifyContent="space-between">
+        <Box ml="2rem" fontSize="2rem">
+          Good Morning lorem!
+        </Box>
 
-          <Box mr="2rem" fontSize="1rem">
-            <select value={Class} onChange={(e)=>{selectstudent(e.target.value);setClass(e.target.value)}} >
-              <option>Select Class</option>
-              <option>Class 7</option>
-              <option>Class 8</option>
-              <option>Class 9</option>
-            </select>
-          </Box>
-        </Flex>
-
-
+        <Box mr="2rem" fontSize="1rem">
+          <select value={Class} onChange={(e)=>{selectstudent(e.target.value);setClass(e.target.value)}} >
+            <option>Select Class</option>
+            <option>Class 7</option>
+            <option>Class 8</option>
+            <option>Class 9</option>
+          </select>
+        </Box>
+      </Flex>
 
 
-        <Box as="div"  height="100vh" ml={'4rem'}  >
-      <table {...getTableProps()} style={{ width: '100%' }}>
-        <thead>
-          {headerGroups.map((headerGroup) => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column) => (
-                <th {...column.getHeaderProps()} style={{ padding: '1rem'}}>
-                  {column.render('Header')}
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
-          {rows.map((row) => {
-            prepareRow(row);
-            return (
-              <tr {...row.getRowProps()} >
-                {row.cells.map((cell) => (
-                  <td {...cell.getCellProps()} style={{ padding: '1rem',width:'6%'}}>
-                    {cell.render('Cell')}
-                  </td>
+
+
+      <Box as="div"  height="100vh" ml={'4rem'}  >
+        <table {...getTableProps()} style={{ width: '100%' }}>
+          <thead>
+            {headerGroups.map((headerGroup) => (
+              <tr {...headerGroup.getHeaderGroupProps()}>
+                {headerGroup.headers.map((column) => (
+                  <th {...column.getHeaderProps()} style={{ padding: '1rem'}}>
+                    {column.render('Header')}
+                  </th>
                 ))}
               </tr>
-            );
-          })}
-        </tbody>
-      </table>
-      {candidates.length === 0 && (
-        <Flex mt={'5rem'} fontSize={'2rem'} justifyContent={'center'}>
-          Please Select a class...
-        </Flex>
-      )}
+            ))}
+          </thead>
+          <tbody {...getTableBodyProps()}>
+            {rows.map((row) => {
+              prepareRow(row);
+              return (
+                <tr {...row.getRowProps()} >
+                  {row.cells.map((cell) => (
+                    <td {...cell.getCellProps()} style={{ padding: '1rem',width:'6%'}}>
+                      {cell.render('Cell')}
+                    </td>
+                  ))}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+        {candidates.length === 0 && (
+          <Flex mt={'5rem'} fontSize={'2rem'} justifyContent={'center'}>
+            Please Select a class...
+          </Flex>
+        )}
     </Box>
 
 
 
 
-         <Box display={'none'} className='form' position="fixed" top="0" left="0" right="0" bottom="0"  textAlign={'center'} justifyContent="center" alignItems="center">
+    <Box display={'none'} className='form' position="fixed" top="0" left="0" right="0" bottom="0"  textAlign={'center'} justifyContent="center" alignItems="center">
     
       <Box
         position="absolute"
@@ -317,47 +330,42 @@ const ManageStudent: React.FC = () => {
 
     
     <Box display={'none'} className='addstudent' position="fixed" top="0" left="0" right="0" bottom="0"  textAlign={'center'} justifyContent="center" alignItems="center">
-    
-    <Box
-      position="absolute"
-      top="0"
-      left="0"
-      right="0"
-      bottom="0"
-      backgroundColor="rgba(0, 0, 0, 0.4)" // Adjust the background color and opacity as needed
-      backdropFilter="blur(8px)" // Adjust the blur intensity as needed
-    />
-    <Box width="300px" bg="white" p={4} borderRadius="md" boxShadow="md" zIndex="10">
-      <FormControl>
-        <FormLabel htmlFor="name">Name</FormLabel>
-        <Input value={Name} onChange={(e)=>handlestudentname(e)} type="text" id="name" placeholder="Type student name..." />
-      </FormControl>
-      <FormControl mt={4}>
-        <FormLabel htmlFor="rollNo">Roll No</FormLabel>
-        <Input value={Rollno} onChange={(e)=>handlestudentrollno((e))} type="number" id="rollNo" placeholder="Type roll number..." />
-      </FormControl>
-      <FormControl mt={4}>
-        <FormLabel htmlFor="class">Class</FormLabel>
-        <Input value={Class} onChange={(e)=>setClass(e.target.value)} type="text" id="rollNo" placeholder="Enter class..." />
-      </FormControl>
-      <Button type={'submit'} onClick={()=>handleaddstudent()}  mt={4} colorScheme="blue">
-        Submit
-      </Button>
-    </Box>
-  </Box> 
-
-
-
-
-
-
-
-    <Flex  onClick={()=>handleaddstudentform()} sx={addButtonStyles}>
-            <Text pt={'5px'} >+</Text>
-        </Flex>
       
-       
+      <Box
+        position="absolute"
+        top="0"
+        left="0"
+        right="0"
+        bottom="0"
+        backgroundColor="rgba(0, 0, 0, 0.4)" // Adjust the background color and opacity as needed
+        backdropFilter="blur(8px)" // Adjust the blur intensity as needed
+        onClick={()=>handleaddstudentform()}
+      />
+      <Box width="300px" bg="white" p={4} borderRadius="md" boxShadow="md" zIndex="10">
+        <FormControl>
+          <FormLabel htmlFor="name">Name</FormLabel>
+          <Input value={Name} onChange={(e)=>handlestudentname(e)} type="text" id="name" placeholder="Type student name..." />
+        </FormControl>
+        <FormControl mt={4}>
+          <FormLabel htmlFor="rollNo">Roll No</FormLabel>
+          <Input value={Rollno} onChange={(e)=>handlestudentrollno((e))} type="number" id="rollNo" placeholder="Type roll number..." />
+        </FormControl>
+        <FormControl mt={4}>
+          <FormLabel htmlFor="class">Class</FormLabel>
+          <Input value={Class} onChange={(e)=>setClass(e.target.value)} type="text" id="rollNo" placeholder="Enter class..." />
+        </FormControl>
+        <Button type={'submit'} onClick={()=>handleaddstudent()}  mt={4} colorScheme="blue">
+          Submit
+        </Button>
       </Box>
+    </Box> 
+
+    <Flex onClick={()=>handleaddstudentform()} sx={addButtonStyles}>
+        <Text pt={'5px'} >+</Text>
+    </Flex>
+        
+       
+    </Box>
     </div>
   );
 };
