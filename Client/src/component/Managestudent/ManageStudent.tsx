@@ -27,7 +27,7 @@ const ManageStudent: React.FC = () => {
     height: "60px",
     width: "60px",
     position: "fixed",
-    right: "330px",
+    right: "430px",
     bottom: "30px",
     justifyContent: "center",
     align: "center",
