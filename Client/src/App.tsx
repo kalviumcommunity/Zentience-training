@@ -12,6 +12,7 @@ import ManageStudent from './component/Managestudent/ManageStudent';
 import StudentLogin from './component/StudentLogin/StudentLogin';
 
 import useUserStore from './store'
+import Assignments from './component/Assignments/Assignments';
 
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
           {/* <Route path="/teacherlogin" element={<TeacherLogin />} /> */}
 
           <Route path="/home" element={<Dasboard />} />
+          <Route path="/assignments" element={<Assignments/>} />
           <Route path="/announcements" element={<PostingAnnouncements isTeacher={isTeacher} />} />
           <Route path="/attendance" element={<AssignTasks />} />
       </Routes>
