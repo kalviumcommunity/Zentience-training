@@ -12,26 +12,26 @@ import ManageStudent from './component/Managestudent/ManageStudent';
 import StudentLogin from './component/StudentLogin/StudentLogin';
 
 import useUserStore from './store'
-import Assignments from './component/Assignments/Assignments';
 
 
 function App() {
   const isTeacher = useUserStore((state) => state.isTeacher);
 
-  if(isTeacher) {
+  if (isTeacher) {
     return (
       <Routes>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/studentlogin" element={<StudentLogin />} />
-          {/* <Route path="/teacherlogin" element={<TeacherLogin />} /> */}
-
-          <Route path="/home" element={<Dasboard />} />
-          <Route path="/managestudents" element={<ManageStudent />} />
-          <Route path="/assigntasks" element={<AssignTasks />} />
-          <Route path="/announcements" element={<PostingAnnouncements isTeacher={isTeacher} />} />
-          <Route path="/attendance" element={<AssignTasks />} />
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/studentlogin" element={<StudentLogin />} />
+        <Route path="/home" element={<Dasboard />} />
+        <Route path="/managestudents" element={<ManageStudent />} />
+        <Route path="/assigntasks" element={<AssignTasks />} />
+        <Route
+          path="/announcements"
+          element={<PostingAnnouncements isTeacher={isTeacher} />}
+        />
+        <Route path="/attendance" element={<AssignTasks />} />
       </Routes>
-    )
+    );
   } else {
     return (
       <Routes>
@@ -40,11 +40,10 @@ function App() {
           {/* <Route path="/teacherlogin" element={<TeacherLogin />} /> */}
 
           <Route path="/home" element={<Dasboard />} />
-          <Route path="/assignments" element={<Assignments/>} />
           <Route path="/announcements" element={<PostingAnnouncements isTeacher={isTeacher} />} />
           <Route path="/attendance" element={<AssignTasks />} />
       </Routes>
-    )
+    );
   }
 }
 
