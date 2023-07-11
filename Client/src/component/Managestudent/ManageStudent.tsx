@@ -10,11 +10,10 @@ import useStudentStore from './StudentStore';
 
 
 interface Student {
-  number: number;
   Name: string;
   Rollno: number;
   Class: string;
-  id:number;
+  _id:number;
 }
 
 
@@ -88,7 +87,7 @@ const ManageStudent: React.FC = () => {
       .then((data) => {
         const filtered=data.filter((item: Student) => item.Class === e);
         setcandidate(filtered);
-        resetForm();
+      
       })
       .catch((error) => {
         console.error('Error retrieving students:', error);
@@ -113,14 +112,13 @@ const ManageStudent: React.FC = () => {
   const deletestudent = (id: number) => {
     const confirmed = window.confirm("Are you sure you want to delete it?");
     if (confirmed) {
-      fetch(`${link}/studentData/${id}`, {
+       fetch(`${link}/studentData/${id}`, {
         method: 'DELETE',
       })
         .then((response) => response.json())
         .then((data) => {
-          const filtered = candidates.filter((item: Student) => item.id !== id);
-          setcandidate(filtered);
-          console.log("Student data is deleted");
+          selectstudent(Class);
+          
         })
         .catch((error) => {
           console.error('Error while deleting students:', error);
@@ -201,10 +199,10 @@ const ManageStudent: React.FC = () => {
         Cell: ({ row }:{row:any}) => (
           <Flex width={'40rem'} justifyContent={'flex-end'} >
             <Flex mr="4rem">
-              <MdOutlineModeEdit onClick={() => handleform(row.original.id)} />
+              <MdOutlineModeEdit onClick={() => handleform(row.original._id)} />
             </Flex>
             <Flex mr="4rem">
-              <RiDeleteBinLine color="red" onClick={() => deletestudent(row.original.id)} />
+              <RiDeleteBinLine color="red" onClick={() => deletestudent(row.original._id)} />
             </Flex>
           </Flex>
         ),

@@ -7,7 +7,7 @@ import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
 export class StudentData {
 
   @Prop({ required: true })
-  name: string;
+  Name: string;
   @Prop({ required: true })
   Class: string;
   @Prop({ required: true })
