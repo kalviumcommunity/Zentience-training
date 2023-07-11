@@ -10,7 +10,7 @@ function AssignTasks() {
         height: "60px",
         width: "60px",
         position: "fixed",
-        right: "240px",
+        right: "330px",
         bottom: "30px",
         justifyContent: "center",
         align: "center",
@@ -86,7 +86,7 @@ function AssignTasks() {
                 />
             </Grid>
         <Flex sx={addButtonStyles}>
-            <Text>+</Text>
+            <Text pt={'5px'} >+</Text>
         </Flex>
       </Container>
     </div>
