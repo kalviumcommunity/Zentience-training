@@ -5,11 +5,7 @@ import LeftBar from '../SideBar/LeftBar';
 import useAnnouncementStore from './AnnouncementStore';
 import RightBar from '../SideBar/RightBar';
 
-type PostingAnnouncementsProps = {
-  isTeacher: boolean
-}
-
-function PostingAnnouncements(props: PostingAnnouncementsProps) {
+function TeachersAnnouncements() {
   const { title, description, setTitle, setDescription, resetForm } = useAnnouncementStore();
 
   const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -45,7 +41,6 @@ function PostingAnnouncements(props: PostingAnnouncementsProps) {
   return (
     <div className='announcements'>
       <LeftBar />
-      <RightBar />
       <Container maxW="1190px" ml="170px">
         <Flex flexDirection="column" alignItems="flex-end">
           <Select fontWeight='700' width='229px' placeholder='Select Class' marginTop ="25px" alignSelf="flex-end">
@@ -89,9 +84,10 @@ function PostingAnnouncements(props: PostingAnnouncementsProps) {
           </Button>
         </Flex>
       </Container>
+      <RightBar/>
     </div>
   );
 }
 
-export default PostingAnnouncements;
+export default TeachersAnnouncements;
 

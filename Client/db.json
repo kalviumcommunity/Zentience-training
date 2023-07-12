@@ -19,6 +19,21 @@
       "title": "test ",
       "description": "this is a test announcement",
       "id": 5
+    },
+    {
+      "title": "dummy test for students view",
+      "description": "dummy test for students view, ",
+      "id": 6
+    },
+    {
+      "title": "nr",
+      "description": "2jrolneiwebw fjiwef jwefjw0e ef9 wefi0w jejfijwe fwje fw ejf0 wefij we0f j0wiejf9wej fiwej f wef9ij wefij wei9fjwe9f wifj wejf iwjefiwefi wei9f wefj weejf 0wiejf wie fiwej fwfef w efwj wef0w jef0iw jf",
+      "id": 7
+    },
+    {
+      "title": "Crop quickly: Once an image is selected, hold down ⌘ (Mac) or Ctrl (Windows) while you click and drag the corners to crop it. Releasing ⌘ / Ctrl b",
+      "description": "Crop quickly: Once an image is selected, hold down ⌘ (Mac) or Ctrl (Windows) while you click and drag the corners to crop it. Releasing ⌘ / Ctrl b",
+      "id": 8
     }
   ],
   "assignments": [
