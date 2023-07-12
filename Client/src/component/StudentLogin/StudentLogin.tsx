@@ -9,8 +9,9 @@ import {
   Heading,
   Text,
   useColorModeValue,
+  Center,
 } from "@chakra-ui/react";
-import useAuthStore  from "./AuthStore";
+import useAuthStore from "./AuthStore";
 
 function StudentLogin() {
   const { username, password, error, setUsername, setPassword, setError } =
@@ -18,12 +19,12 @@ function StudentLogin() {
 
   const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(e.target.value);
-    setError(""); 
+    setError("");
   };
 
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
-    setError(""); 
+    setError("");
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -81,7 +82,7 @@ function StudentLogin() {
           </Text>
         </Stack>
 
-        <Box w="100vh" mt={69}>
+        <Box w="55vh" mt={69}  >
           <form onSubmit={handleSubmit}>
             <Stack spacing={4}>
               <FormControl>
@@ -110,9 +111,10 @@ function StudentLogin() {
                 </FormLabel>
               </FormControl>
               {error && <p>{error}</p>}
-              <Button
+              <Button 
                 bg={"blue.900"}
                 color={"white"}
+               
                 _hover={{
                   bg: "blue.700",
                 }}
