@@ -11,7 +11,7 @@ import {
   useColorModeValue,
   Center,
 } from "@chakra-ui/react";
-import useAuthStore from "./AuthStore";
+import useAuthStore from "../../Store/AuthStore";
 
 function StudentLogin() {
   const { username, password, error, setUsername, setPassword, setError } =

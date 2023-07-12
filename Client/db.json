@@ -34,6 +34,11 @@
       "title": "Crop quickly: Once an image is selected, hold down ⌘ (Mac) or Ctrl (Windows) while you click and drag the corners to crop it. Releasing ⌘ / Ctrl b",
       "description": "Crop quickly: Once an image is selected, hold down ⌘ (Mac) or Ctrl (Windows) while you click and drag the corners to crop it. Releasing ⌘ / Ctrl b",
       "id": 8
+    },
+    {
+      "title": "vacation",
+      "description": "summer vacation is starting from 1 May ",
+      "id": 9
     }
   ],
   "assignments": [
