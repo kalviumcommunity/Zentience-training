@@ -30,7 +30,7 @@ function TeachersAnnouncements() {
   const handlePost = () => {
     const announcementData = { title, description };
 
-    fetch("http://localhost:3001/announcements", {
+    fetch(`${process.env.REACT_APP_SERVER_LINK}/announcements`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

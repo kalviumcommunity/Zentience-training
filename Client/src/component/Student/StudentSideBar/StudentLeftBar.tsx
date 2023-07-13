@@ -54,7 +54,7 @@ function StudentLeftBar() {
       <Box>
         <Heading size="lg">Edutrack</Heading>
         <Box mt="40px">
-          <Flex sx={path === "/Studenthome" ? activeButtonStyles : buttonStyles}align="center"onClick={() => navigate("/Studenthome")}>Dashboar</Flex>
+          <Flex sx={path === "/home" ? activeButtonStyles : buttonStyles}align="center"onClick={() => navigate("/home")}>Dashboar</Flex>
           <Flex sx={path === "/assignments" ? activeButtonStyles : buttonStyles}align="center"onClick={() => navigate("/assignments")}>Assignment</Flex>
           <Flex sx={path === "/studentannouncements" ? activeButtonStyles : buttonStyles}align="center"onClick={() => navigate("/studentannouncements")}>Announcements</Flex>
         </Box>
