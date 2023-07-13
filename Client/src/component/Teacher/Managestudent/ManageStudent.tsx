@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Flex,
   Box,
@@ -145,6 +145,7 @@ const ManageStudent: React.FC = () => {
     } else {
       formElement.style.display = "none";
     }
+    setEmailGenerated(false);
   };
 
   const handleaddstudent = () => {
@@ -167,11 +168,11 @@ const ManageStudent: React.FC = () => {
         const formElement = document.querySelector(
           ".addstudent"
         ) as HTMLElement;
-        if (formElement.style.display === "none") {
-          formElement.style.display = "flex";
-        } else {
-          formElement.style.display = "none";
-        }
+        // if (formElement.style.display === "none") {
+        //   formElement.style.display = "flex";
+        // } else {
+        //   formElement.style.display = "none";
+        // }
       })
       .catch((error) => {
         console.error("Error while updating student data:", error);
@@ -236,10 +237,15 @@ const ManageStudent: React.FC = () => {
       data: candidates,
     });
 
+  
+  const [emailGenerated, setEmailGenerated] = useState(false);
+  const [studentEmail, setStudentEmail] = useState("");
+  const [studentPassword, setStudentPassword] = useState("");
+
   const generateEmailAndPassword = () => {
     let email =
       Name.trim().split(" ").join().toLowerCase() +
-      (Math.random() * 100000).toString() +
+      (Math.floor(Math.random() * 100000)).toString() +
       "@xyz.com";
     let length = 12,
       charset =
@@ -249,7 +255,9 @@ const ManageStudent: React.FC = () => {
       pass += charset.charAt(Math.floor(Math.random() * n));
     }
     console.log([email, pass]);
-
+    setEmailGenerated(true);
+    setStudentEmail(email);
+    setStudentPassword(pass);
     return [email, pass];
   };
 
@@ -325,65 +333,7 @@ const ManageStudent: React.FC = () => {
           )}
         </Box>
 
-        <Box
-          display={"none"}
-          className="form"
-          position="fixed"
-          top="0"
-          left="0"
-          right="0"
-          bottom="0"
-          textAlign={"center"}
-          justifyContent="center"
-          alignItems="center"
-        >
-          <Box
-            position="absolute"
-            top="0"
-            left="0"
-            right="0"
-            bottom="0"
-            backgroundColor="rgba(0, 0, 0, 0.4)" // Adjust the background color and opacity as needed
-            backdropFilter="blur(8px)" // Adjust the blur intensity as needed
-          />
-          <Box
-            width="300px"
-            bg="white"
-            p={4}
-            borderRadius="md"
-            boxShadow="md"
-            zIndex="10"
-          >
-            <FormControl>
-              <FormLabel htmlFor="name">Name</FormLabel>
-              <Input
-                value={Name}
-                onChange={(e) => handlestudentname(e)}
-                type="text"
-                id="name"
-                placeholder="Type student name..."
-              />
-            </FormControl>
-            <FormControl mt={4}>
-              <FormLabel htmlFor="rollNo">Roll No</FormLabel>
-              <Input
-                value={Rollno}
-                onChange={(e) => handlestudentrollno(e)}
-                type="number"
-                id="rollNo"
-                placeholder="Type roll number..."
-              />
-            </FormControl>
-            <Button
-              type={"submit"}
-              onClick={() => handlestudentupdate()}
-              mt={4}
-              colorScheme="blue"
-            >
-              Submit
-            </Button>
-          </Box>
-        </Box>
+        
 
         <Box
           display={"none"}
@@ -415,44 +365,68 @@ const ManageStudent: React.FC = () => {
             boxShadow="md"
             zIndex="10"
           >
-            <FormControl>
-              <FormLabel htmlFor="name">Name</FormLabel>
-              <Input
-                value={Name}
-                onChange={(e) => handlestudentname(e)}
-                type="text"
-                id="name"
-                placeholder="Type student name..."
-              />
-            </FormControl>
-            <FormControl mt={4}>
-              <FormLabel htmlFor="rollNo">Roll No</FormLabel>
-              <Input
-                value={Rollno}
-                onChange={(e) => handlestudentrollno(e)}
-                type="number"
-                id="rollNo"
-                placeholder="Type roll number..."
-              />
-            </FormControl>
-            <FormControl mt={4}>
-              <FormLabel htmlFor="class">Class</FormLabel>
-              <Input
-                value={Class}
-                onChange={(e) => setClass(e.target.value)}
-                type="text"
-                id="rollNo"
-                placeholder="Enter class..."
-              />
-            </FormControl>
-            <Button
-              type={"submit"}
-              onClick={() => handleaddstudent()}
-              mt={4}
-              colorScheme="blue"
-            >
-              Submit
-            </Button>
+            {
+             !emailGenerated ? 
+              <>
+                <FormControl>
+                  <FormLabel htmlFor="name">Name</FormLabel>
+                  <Input
+                    value={Name}
+                    onChange={(e) => handlestudentname(e)}
+                    type="text"
+                    id="name"
+                    placeholder="Type student name..."
+                  />
+                </FormControl>
+                <FormControl mt={4}>
+                  <FormLabel htmlFor="rollNo">Roll No</FormLabel>
+                  <Input
+                    value={Rollno}
+                    onChange={(e) => handlestudentrollno(e)}
+                    type="number"
+                    id="rollNo"
+                    placeholder="Type roll number..."
+                  />
+                </FormControl>
+                <FormControl mt={4}>
+                  <FormLabel htmlFor="class">Class</FormLabel>
+                  <Input
+                    value={Class}
+                    onChange={(e) => setClass(e.target.value)}
+                    type="text"
+                    id="rollNo"
+                    placeholder="Enter class..."
+                  />
+                </FormControl>
+                <Button
+                  type={"submit"}
+                  onClick={() => handleaddstudent()}
+                  mt={4}
+                  colorScheme="blue"
+                >
+                  Submit
+                </Button>
+              </>
+            :
+            <>
+              <Flex>
+                <Text>Email: </Text>
+                <Text>{studentEmail}</Text>
+              </Flex>
+              <Flex>
+                <Text>Password: </Text>
+                <Text>{studentPassword}</Text>
+              </Flex>
+              <Button
+                type={"submit"}
+                // onClick={() => handleaddstudentform()}
+                mt={4}
+                colorScheme="blue"
+              >
+                Copy
+              </Button>
+            </>
+          }
           </Box>
         </Box>
 
