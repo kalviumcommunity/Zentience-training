@@ -72,7 +72,7 @@ function StudentLogin() {
         .then(response => response.json())
         .then(data => {
             if(data.message === 'student login successfully'){
-              console.log("match")
+              
               navigate('/Studenthome')
             }else{
               console.log("not match")
