@@ -2,12 +2,15 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { StudentData } from './Schemas/StudentData.schema';
 import * as mongoose from 'mongoose';
+import { addedstudent } from './Schemas/Added-student.schema';
 
 @Injectable()
 export class AppService {
   constructor(
     @InjectModel(StudentData.name)
     private studentModel: mongoose.Model<StudentData>,
+    @InjectModel(addedstudent.name)
+    private addedStudentModel: mongoose.Model<addedstudent>,
   ) {}
 
   async findAll(): Promise<StudentData[]> {
@@ -17,6 +20,11 @@ export class AppService {
 
   async create(student: StudentData): Promise<StudentData> {
     const res = await this.studentModel.create(student);
+    return res;
+  }
+
+  async addStudent(student: addedstudent): Promise<addedstudent> {
+    const res = await this.addedStudentModel.create(student);
     return res;
   }
 

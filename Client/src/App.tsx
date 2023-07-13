@@ -11,6 +11,7 @@ import TeachersAnnouncements from './component/Announcements/TeachersAnnouncemen
 import StudentsAnnouncements from './component/Announcements/StudentsAnnouncements';
 
 import useUserStore from './store'
+import ManageStudent from './component/Managestudent/ManageStudent';
 
 
 function App() {
@@ -21,7 +22,7 @@ function App() {
       <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/home" element={<Dasboard />} />
-          <Route path="/managestudents" element={<AssignTasks />} />
+          <Route path="/managestudents" element={<ManageStudent />} />
           <Route path="/assigntasks" element={<AssignTasks />} />
           <Route path="/teachersannouncements" element={<TeachersAnnouncements />} />
           <Route path="/studentannouncements" element={<StudentsAnnouncements />} />

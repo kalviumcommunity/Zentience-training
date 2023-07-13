@@ -54,6 +54,8 @@ function RightBar() {
     },
   };
 
+  const username=sessionStorage.getItem("username");
+
   return (
     <Flex
       sx={sidebarStyles}
@@ -64,7 +66,7 @@ function RightBar() {
       <Flex align="center" justifyContent="space-between" direction="column">
         <Box sx={userProfile}></Box>
         <Heading size="md" m="25px 0 30px">
-          David Foster
+          {username}
         </Heading>
         <Flex sx={editProfileButton} align="center" justifyContent="center">
           {" "}
