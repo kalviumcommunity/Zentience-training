@@ -2,7 +2,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import React from "react";
 
 export const LoginButton: React.FC = () => {
-  const { loginWithRedirect } = useAuth0();
+  const { loginWithRedirect, user } = useAuth0();
 
   const handleLogin = async () => {
     await loginWithRedirect({
@@ -14,6 +14,12 @@ export const LoginButton: React.FC = () => {
       },
     });
   };
+
+  if (user && user.name) {
+    sessionStorage.clear();
+    console.log("Username:", user.name);
+    sessionStorage.setItem("username", user.name);
+  }
 
   return (
     <button onClick={handleLogin} className="login-button">

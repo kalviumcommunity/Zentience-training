@@ -10,6 +10,8 @@ import {
 import { AppService } from './app.service';
 import { StudentData } from './Schemas/StudentData.schema';
 import { Createstudentdto } from './DTO/create-student.dto';
+import { addedstudentdto } from './DTO/add-Student.dto';
+import { addedstudent } from './Schemas/Added-student.schema';
 
 @Controller()
 export class AppController {
@@ -26,6 +28,14 @@ export class AppController {
     body: Createstudentdto,
   ): Promise<StudentData> {
     return this.appService.create(body);
+  }
+
+  @Post('/addStudent')
+  async addStudent(
+    @Body()
+    body: addedstudentdto,
+  ): Promise<addedstudent> {
+    return this.appService.addStudent(body);
   }
 
   @Patch('/studentData/:id')
