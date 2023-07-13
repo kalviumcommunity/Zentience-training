@@ -69,11 +69,7 @@ function RightBar() {
       <Flex align="center" justifyContent="space-between" direction="column">
         <Box sx={userProfile}></Box>
         <Heading size="md" m="25px 0 30px">
-<<<<<<< HEAD:Client/src/component/SideBar/RightBar.tsx
           {username}
-=======
-          {user?.name}
->>>>>>> 92a956007c2f7b1a8c45d729885202fed6bd42b6:Client/src/component/Teacher/SideBar/RightBar.tsx
         </Heading>
         <Flex sx={editProfileButton} align="center" justifyContent="center">
           {" "}
