@@ -4,9 +4,9 @@ import { MdOutlineModeEdit } from 'react-icons/md';
 import { RiDeleteBinLine } from 'react-icons/ri';
 import { BsPlusCircleFill } from 'react-icons/bs';
 import { useTable } from "react-table";
-import LeftBar from '../Teacher/SideBar/LeftBar';
-import RightBar from '../Teacher/SideBar/RightBar';
-import useStudentStore from '../Store/StudentStore';
+import LeftBar from '../SideBar/LeftBar';
+import RightBar from '../SideBar/RightBar';
+import useStudentStore from '../../Store/StudentStore';
 
 
 interface Student {

@@ -9,8 +9,10 @@ import {
   Heading,
   Text,
   useColorModeValue,
+  Center,
 } from "@chakra-ui/react";
-import useAuthStore  from "./AuthStore";
+import {useNavigate} from "react-router-dom"
+import useAuthStore from "../../Store/AuthStore";
 
 function StudentLogin() {
   const { username, password, error, setUsername, setPassword, setError } =
@@ -18,12 +20,14 @@ function StudentLogin() {
 
   const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(e.target.value);
-    setError(""); 
+    setError("");
   };
+
+  const navigate = useNavigate();
 
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
-    setError(""); 
+    setError("");
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -34,7 +38,7 @@ function StudentLogin() {
       return;
     }
 
-    if (!/^[a-zA-Z0-9]+$/.test(username)) {
+    if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(username)) {
       setError("Username must contain only letters and numbers");
       return;
     }
@@ -50,10 +54,38 @@ function StudentLogin() {
       return;
     }
 
-    setError("");
+    const link = process.env.REACT_APP_SERVER_LINK;
 
-    console.log("Username:", username);
-    console.log("Password:", password);
+    setError("");
+    if(!error){
+      console.log("no error")
+
+      const studentData = {username,password};
+
+      fetch(`${link}/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(studentData),
+      })
+        .then(response => response.json())
+        .then(data => {
+            if(data.message === 'student login successfully'){
+              
+              navigate('/Studenthome')
+            }else{
+              console.log("not match")
+            }
+            
+  
+        })
+        .catch(error => {
+          console.error('Error while updating student data:', error);
+        });
+    }
+
+ 
   };
 
   return (
@@ -81,7 +113,7 @@ function StudentLogin() {
           </Text>
         </Stack>
 
-        <Box w="100vh" mt={69}>
+        <Box w="55vh" mt={69}  >
           <form onSubmit={handleSubmit}>
             <Stack spacing={4}>
               <FormControl>
@@ -110,13 +142,15 @@ function StudentLogin() {
                 </FormLabel>
               </FormControl>
               {error && <p>{error}</p>}
-              <Button
+              <Button 
                 bg={"blue.900"}
                 color={"white"}
+               
                 _hover={{
                   bg: "blue.700",
                 }}
                 type="submit"
+                
               >
                 Log In
               </Button>

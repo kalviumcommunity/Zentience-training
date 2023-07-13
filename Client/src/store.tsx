@@ -6,7 +6,7 @@ type userStoreState = {
 };
 
 const useUserStore = create<userStoreState>((set) => ({
-  isTeacher: false,
+  isTeacher: true,
   setIsTeacher: (value) => set((state) => ({ ...state, isTeacher: value })),
 }));
 

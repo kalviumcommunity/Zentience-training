@@ -1,14 +1,24 @@
-import React, { useEffect } from 'react';
-import LeftBar from '../SideBar/LeftBar';
-import RightBar from '../SideBar/RightBar';
-import { Box, Container, Flex, Grid, Heading, Text, Wrap, WrapItem } from '@chakra-ui/react';
-import AnnouncementCard from './AnnouncementCard';
-import useAnnouncementStore from './AnnouncementStore';
+import React, { useEffect } from "react";
+import StudentLeftBar from "../StudentSideBar/StudentLeftBar";
+import StudentRightBar from "../StudentSideBar/StudentRightBar";
+import {
+  Box,
+  Container,
+  Flex,
+  Grid,
+  Heading,
+  Text,
+  Wrap,
+  WrapItem,
+} from "@chakra-ui/react";
+import AnnouncementCard from "../../Teacher/Announcements/AnnouncementCard";
+import useAnnouncementStore from "../../Store/AnnouncementStore";
 
 function StudentsAnnouncements() {
   const announcements = useAnnouncementStore((state) => state.announcements);
-  const fetchAnnouncements = useAnnouncementStore((state) => state.fetchAnnouncements);
-
+  const fetchAnnouncements = useAnnouncementStore(
+    (state) => state.fetchAnnouncements
+  );
 
   useEffect(() => {
     fetchAnnouncements();
@@ -27,16 +37,18 @@ function StudentsAnnouncements() {
     fontWeight: "600",
     bg: "#14274E",
     textColor: "white",
-    cursor: "pointer"
-  }
+    cursor: "pointer",
+  };
 
   return (
-    <div className='assigntasks'>
-      <LeftBar />
+    <div className="assigntasks">
+      <StudentLeftBar />
 
       <Container m="50px 0px 0 220px">
-        <Heading size="md" m="0 0 20px">Announcements</Heading>
-        <Grid templateColumns='repeat(3, 1fr)'>
+        <Heading size="md" m="0 0 20px">
+          Announcements
+        </Heading>
+        <Grid templateColumns="repeat(3, 1fr)">
           {announcements.map((announcement) => (
             <AnnouncementCard
               key={announcement.id}
@@ -46,9 +58,9 @@ function StudentsAnnouncements() {
           ))}
         </Grid>
       </Container>
-      <RightBar/>
+      <StudentRightBar />
     </div>
-  )
+  );
 }
 
 export default StudentsAnnouncements;

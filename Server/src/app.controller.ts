@@ -1,22 +1,73 @@
-import { Controller, Get, Body, Post } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Body,
+  Post,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { AppService } from './app.service';
 import { StudentData } from './Schemas/StudentData.schema';
 import { Createstudentdto } from './DTO/create-student.dto';
+import { addedstudentdto } from './DTO/add-Student.dto';
+import { addedstudent } from './Schemas/Added-student.schema';
+import { CreateAnnouncementDto } from './DTO/CreateAnnouncementDto';
+import { AnnouncementsService } from './AnnouncementsService';
 
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Get('/studentdata')
+  @Get('/studentData')
   async getallstudent(): Promise<StudentData[]> {
     return this.appService.findAll();
   }
 
-  @Post('/addstudent')
+  @Post('/studentData')
   async createstudent(
     @Body()
     body: Createstudentdto,
   ): Promise<StudentData> {
     return this.appService.create(body);
+  }
+
+  @Post('/addStudent')
+  async addStudent(
+    @Body()
+    body: addedstudentdto,
+  ): Promise<addedstudent> {
+    return this.appService.addStudent(body);
+  }
+
+  @Post('/login')
+  async checkstudent(
+    @Body()
+    body: any,
+  ): Promise<{ message: string }> {
+    return this.appService.checkstudent(body);
+  }
+
+  @Patch('/studentData/:id')
+  async updatestudent(
+    @Body()
+    body: Createstudentdto,
+    @Param('id')
+    id: number,
+  ): Promise<{ message: string }> {
+    return this.appService.update(id, body);
+  }
+
+  @Delete('/studentData/:id')
+  async deletestudent(
+    @Param('id')
+    id: number,
+  ): Promise<{ message: string }> {
+    return this.appService.delete(id);
+  }
+
+@Post('/announcements')
+  create(@Body() createAnnouncementDto: CreateAnnouncementDto) {
+    return this.AnnouncementsService.create(createAnnouncementDto);
   }
 }
