@@ -149,6 +149,7 @@ const ManageStudent: React.FC = () => {
 
   const handleaddstudent = () => {
     const studentData = { Name, Rollno, Class };
+    generateEmailAndPassword();
 
     fetch(`${link}/studentData`, {
       method: "POST",
@@ -238,7 +239,7 @@ const ManageStudent: React.FC = () => {
   const generateEmailAndPassword = () => {
     let email =
       Name.trim().split(" ").join().toLowerCase() +
-      (Math.random() * 100000).toString +
+      (Math.random() * 100000).toString() +
       "@xyz.com";
     let length = 12,
       charset =
