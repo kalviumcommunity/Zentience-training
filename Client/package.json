@@ -15,6 +15,7 @@
     "@types/react": "^18.2.13",
     "@types/react-dom": "^18.2.6",
     "framer-motion": "^10.12.17",
+    "mongoose": "^7.3.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.10.1",
