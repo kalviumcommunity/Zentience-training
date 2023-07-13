@@ -1,10 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
-import { Auth0ProviderWithNavigate } from "./auth-provider";
 import "./index.css";
-import App from "./App"
-// import reportWebVitals from './reportWebVitals';
+import App from "./App";
 import { ChakraProvider } from "@chakra-ui/react";
 
 const root = ReactDOM.createRoot(
@@ -13,9 +11,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <ChakraProvider>
     <BrowserRouter>
-      <Auth0ProviderWithNavigate>
-        <App />
-      </Auth0ProviderWithNavigate>
+      <App />
     </BrowserRouter>
   </ChakraProvider>
 );

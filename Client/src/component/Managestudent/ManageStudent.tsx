@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Flex, Box,Text, Image, FormControl, FormLabel, Input, Button } from '@chakra-ui/react';
 import { MdOutlineModeEdit } from 'react-icons/md';
 import { RiDeleteBinLine } from 'react-icons/ri';
 import { BsPlusCircleFill } from 'react-icons/bs';
 import { useTable } from "react-table";
-import LeftBar from '../SideBar/LeftBar';
-import RightBar from '../SideBar/RightBar';
-import useStudentStore from '../../Store/StudentStore';
+import LeftBar from '../Teacher/SideBar/LeftBar';
+import RightBar from '../Teacher/SideBar/RightBar';
+import useStudentStore from '../Store/StudentStore';
 
 
 interface Student {
@@ -160,15 +160,11 @@ const ManageStudent: React.FC = () => {
         // setClass('');
         selectstudent(Class);
         const formElement = document.querySelector('.addstudent') as HTMLElement;
-
-        // Commenting out the following code so that this window doesn't disappear on clicking "copy"
-
-        // if (formElement.style.display === 'none') {
-        //   formElement.style.display = 'flex';
-        // } else {
-        //   formElement.style.display = 'none';
-        // }
-
+        if (formElement.style.display === 'none') {
+          formElement.style.display = 'flex';
+        } else {
+          formElement.style.display = 'none';
+        }
       })
       .catch(error => {
         console.error('Error while updating student data:', error);
@@ -226,13 +222,10 @@ const ManageStudent: React.FC = () => {
     columns,
     data: candidates,
   });
-
-
-  const [emailGenerated, setEmailGenerated] = useState(false);
  
 
   const generateEmailAndPassword = () => {
-    let email = Name.trim().split(" ").join().toLowerCase() + (Math.floor(Math.random() * 100000)).toString() + "@xyz.com";
+    let email = Name.trim().split(" ").join().toLowerCase() + (Math.random() * 100000).toString() + "@xyz.com"
     let length = 12,
         charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
         password = "";
@@ -242,8 +235,6 @@ const ManageStudent: React.FC = () => {
     console.log([email, password]);
     setemail(email);
     setpassword(password);
-
-    setEmailGenerated(true);
 
     const studentData = { email, password,Teachername };
 
@@ -270,16 +261,12 @@ const ManageStudent: React.FC = () => {
   
 
   const handledetail=()=>{
-
     const formElement = document.querySelector('.detail') as HTMLElement;
           if (formElement.style.display === 'none') {
             formElement.style.display = 'inline';
           } else {
             formElement.style.display = 'none';
           }
-
-    const textToCopy = `Email: ${email} Password: ${password}`
-    navigator.clipboard.writeText(textToCopy);
   }
 
  console.log("managestudent",Teachername)
@@ -393,7 +380,7 @@ const ManageStudent: React.FC = () => {
                 </FormControl>
           <Flex justifyContent={'center'} >
          <Button type={'submit'} onClick={()=>handledetail()} colorScheme="blue">
-          Copy
+          Close
         </Button>
         </Flex>
         </Box>

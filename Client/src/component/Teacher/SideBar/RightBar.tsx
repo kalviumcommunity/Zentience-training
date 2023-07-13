@@ -55,7 +55,12 @@ function RightBar() {
     },
   };
    const { user } = useAuth0();
-   console.log(user?.name)
+
+
+   if(user?.name){
+    sessionStorage.setItem("username",user?.name);
+   }
+
 
   return (
     <Flex
