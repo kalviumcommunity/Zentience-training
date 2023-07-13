@@ -9,6 +9,9 @@ import StudentDasboard from "./component/Student/StudentDasboard/StudentDashboar
 import StudentLogin from "./component/Student/StudentLogin/StudentLogin";
 import Assignments from "./component/Student/Assignments/Assignments";
 import ManageStudent from "./component/Teacher/Managestudent/ManageStudent";
+import { Auth0ProviderWithNavigate } from "./auth-provider";
+import { AuthenticationGuard } from "./authentication-guard";
+import { ErrorPage } from "./component/404Error/ErrorPage";
 
 function App() {
   const isTeacher = useUserStore((state) => state.isTeacher);
@@ -17,23 +20,27 @@ function App() {
 
   if (isTeacher) {
     return (
+      <Auth0ProviderWithNavigate>
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/home" element={<Dasboard />} />
-        <Route path="/managestudents" element={<ManageStudent />} />
-        <Route path="/assigntasks" element={<AssignTasks />} />
-        <Route path="/teachersannouncements" element={<TeachersAnnouncements />}
+        <Route path="/home" element={<AuthenticationGuard component={Dasboard} />} />
+        <Route path="/managestudents" element={<AuthenticationGuard component={ManageStudent} />} />
+        <Route path="/assigntasks" element={<AuthenticationGuard component={AssignTasks} />} />
+        <Route path="/teachersannouncements" element={<AuthenticationGuard component={TeachersAnnouncements}/>}/>
+        <Route path="*" element={<ErrorPage/>}
         />
       </Routes>
+      </Auth0ProviderWithNavigate>
     );
   } else {
     return (
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/studentlogin" element={<StudentLogin />} />
-        <Route path="/Studenthome" element={<StudentDasboard />} />
+        <Route path="/home" element={<StudentDasboard />} />
         <Route path="/assignments" element={<Assignments/>} />
         <Route path="/studentannouncements" element={<StudentsAnnouncements />} />
+        <Route path="*" element={<ErrorPage/>}/>
       </Routes>
     );
   }
