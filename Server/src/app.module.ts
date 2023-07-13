@@ -4,7 +4,6 @@ import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Studentschema } from './Schemas/StudentData.schema';
-
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: 'StudentData', schema: Studentschema }]),

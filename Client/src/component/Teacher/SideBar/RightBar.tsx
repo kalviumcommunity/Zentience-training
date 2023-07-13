@@ -1,8 +1,9 @@
 import { Box, Flex, Heading } from "@chakra-ui/react";
-import React from "react";
+import { useAuth0 } from "@auth0/auth0-react";
 import { LogoutButton } from "../TeacherLogin/TeacherLogout";
 
 function RightBar() {
+ 
   const sidebarStyles = {
     h: "calc(100vh)",
     w: "200px",
@@ -34,7 +35,7 @@ function RightBar() {
     borderRadius: "50%",
     bg: "#000000",
     backgroundImage: "url('./assets/user1.png')",
-    backgroundSize: "cover"
+    backgroundSize: "cover",
   };
 
   const editProfileButton = {
@@ -53,6 +54,8 @@ function RightBar() {
       cursor: "pointer",
     },
   };
+   const { user } = useAuth0();
+   console.log(user?.name)
 
   return (
     <Flex
@@ -64,7 +67,7 @@ function RightBar() {
       <Flex align="center" justifyContent="space-between" direction="column">
         <Box sx={userProfile}></Box>
         <Heading size="md" m="25px 0 30px">
-          David Foster
+          {user?.name}
         </Heading>
         <Flex sx={editProfileButton} align="center" justifyContent="center">
           {" "}

@@ -1,11 +1,10 @@
 import { create } from 'zustand';
 
 interface Student {
-  number: number;
   Name: string;
   Rollno: number;
   Class: string;
-  id:number;
+  _id:number;
 }
 
 interface StudentStore {
