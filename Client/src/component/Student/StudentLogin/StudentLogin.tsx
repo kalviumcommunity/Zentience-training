@@ -11,6 +11,7 @@ import {
   useColorModeValue,
   Center,
 } from "@chakra-ui/react";
+import {useNavigate} from "react-router-dom"
 import useAuthStore from "../../Store/AuthStore";
 
 function StudentLogin() {
@@ -21,6 +22,8 @@ function StudentLogin() {
     setUsername(e.target.value);
     setError("");
   };
+
+  const navigate = useNavigate();
 
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
@@ -35,7 +38,7 @@ function StudentLogin() {
       return;
     }
 
-    if (!/^[a-zA-Z0-9]+$/.test(username)) {
+    if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(username)) {
       setError("Username must contain only letters and numbers");
       return;
     }
@@ -51,10 +54,38 @@ function StudentLogin() {
       return;
     }
 
-    setError("");
+    const link = process.env.REACT_APP_SERVER_LINK;
 
-    console.log("Username:", username);
-    console.log("Password:", password);
+    setError("");
+    if(!error){
+      console.log("no error")
+
+      const studentData = {username,password};
+
+      fetch(`${link}/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(studentData),
+      })
+        .then(response => response.json())
+        .then(data => {
+            if(data.message === 'student login successfully'){
+              console.log("match")
+              navigate('/Studenthome')
+            }else{
+              console.log("not match")
+            }
+            
+  
+        })
+        .catch(error => {
+          console.error('Error while updating student data:', error);
+        });
+    }
+
+ 
   };
 
   return (
@@ -119,6 +150,7 @@ function StudentLogin() {
                   bg: "blue.700",
                 }}
                 type="submit"
+                
               >
                 Log In
               </Button>
