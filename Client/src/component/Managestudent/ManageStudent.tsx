@@ -258,6 +258,8 @@ const ManageStudent: React.FC = () => {
     return [email, password]
   }
 
+  
+
   const handledetail=()=>{
     const formElement = document.querySelector('.detail') as HTMLElement;
           if (formElement.style.display === 'none') {
@@ -267,7 +269,7 @@ const ManageStudent: React.FC = () => {
           }
   }
 
-
+ console.log("managestudent",Teachername)
 
   return (
     <div>

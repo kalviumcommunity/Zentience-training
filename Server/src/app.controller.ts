@@ -38,6 +38,14 @@ export class AppController {
     return this.appService.addStudent(body);
   }
 
+  @Post('/login')
+  async checkstudent(
+    @Body()
+    body: any,
+  ): Promise<{ message: string }> {
+    return this.appService.checkstudent(body);
+  }
+
   @Patch('/studentData/:id')
   async updatestudent(
     @Body()

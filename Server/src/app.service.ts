@@ -18,6 +18,18 @@ export class AppService {
     return data;
   }
 
+  async checkstudent(body: any): Promise<{ message: string }> {
+    const { username, password } = body;
+    const data = await this.addedStudentModel.findOne({
+      $and: [{ email: username }, { password: password }],
+    });
+    if (data) {
+      return { message: 'student login successfully' };
+    } else {
+      return { message: 'student not found' };
+    }
+  }
+
   async create(student: StudentData): Promise<StudentData> {
     const res = await this.studentModel.create(student);
     return res;
