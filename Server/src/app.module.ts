@@ -6,6 +6,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { Studentschema } from './Schemas/StudentData.schema';
 import { addedstudentsschema } from './Schemas/Added-student.schema';
 import { AnnouncementSchema } from './Schemas/Announcement';
+import { PostModule } from './Announcements/announcement.module';
 @Module({
   imports: [
     MongooseModule.forFeature([
@@ -18,8 +19,10 @@ import { AnnouncementSchema } from './Schemas/Announcement';
       isGlobal: true,
     }),
     MongooseModule.forRoot(process.env.DB_URL),
+    PostModule,
   ],
   controllers: [AppController],
   providers: [AppService],
+  
 })
 export class AppModule {}

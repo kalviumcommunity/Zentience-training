@@ -1,11 +1,16 @@
-import { Schema, Document } from 'mongoose';
 
-export interface Announcement extends Document {
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Document } from 'mongoose';
+
+export type PostDocument = Post & Document;
+
+@Schema()
+export class Post {
+  @Prop({ required: true })
   title: string;
+
+  @Prop({ required: true })
   description: string;
 }
 
-export const AnnouncementSchema = new Schema({
-  title: String,
-  description: String,
-});
+export const AnnouncementSchema = SchemaFactory.createForClass(Post);
