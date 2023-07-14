@@ -55,9 +55,10 @@ export class AppService {
   }
 
   async delete(id: number): Promise<{ message: string }> {
+    const clas = await this.studentModel.findById(id);
     const student = await this.studentModel.findByIdAndRemove(id);
-    if (!student) {
-      return { message: 'Data updated successfully' };
+    if (student) {
+      return { message: `${clas.Class}` };
     } else {
       return { message: 'Student not found' };
     }
