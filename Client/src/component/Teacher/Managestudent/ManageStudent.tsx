@@ -50,7 +50,7 @@ const ManageStudent: React.FC = () => {
   }
 
     const handlestudentupdate = () => {
-      const studentData = { Name, Rollno };
+      const studentData = { Name, Rollno,Teachername };
       
       generateEmailAndPassword();
 
@@ -79,23 +79,27 @@ const ManageStudent: React.FC = () => {
     resetForm();
   };
   
-  const selectstudent = (e:any) => {
-    fetch(`${link}/studentData`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        const filtered=data.filter((item: Student) => item.Class === e);
-        setcandidate(filtered);
-      
-      })
-      .catch((error) => {
-        console.error('Error retrieving students:', error);
+  const selectstudent = async (e: any) => {
+    try {
+      const response = await fetch(`${link}/studentData`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
       });
+      
+      if (!response.ok) {
+        throw new Error('Failed to retrieve student data');
+      }
+  
+      const data = await response.json();
+      const filtered = data.filter((item: Student) => e === item.Class);
+      setcandidate(filtered);
+    } catch (error) {
+      console.error('Error retrieving students:', error);
+    }
   };
+  
 
 
     const handleform=(e:any)=>{
@@ -120,7 +124,8 @@ const ManageStudent: React.FC = () => {
       })
         .then((response) => response.json())
         .then((data) => {
-          selectstudent(Class);
+          selectstudent(data.message);
+         
           
         })
         .catch((error) => {
@@ -209,7 +214,9 @@ const ManageStudent: React.FC = () => {
               <MdOutlineModeEdit onClick={() => handleform(row.original._id)} />
             </Flex>
             <Flex mr="4rem">
-              <RiDeleteBinLine color="red" onClick={() => deletestudent(row.original._id)} />
+              <RiDeleteBinLine color="red" onClick={() => {deletestudent(row.original._id);
+             
+              }} />
             </Flex>
           </Flex>
         ),
@@ -269,7 +276,7 @@ const ManageStudent: React.FC = () => {
           }
   }
 
- console.log("managestudent",Teachername)
+
 
   return (
     <div>
