@@ -12,8 +12,7 @@ import { StudentData } from './Schemas/StudentData.schema';
 import { Createstudentdto } from './DTO/create-student.dto';
 import { addedstudentdto } from './DTO/add-Student.dto';
 import { addedstudent } from './Schemas/Added-student.schema';
-import { CreateAnnouncementDto } from './DTO/CreateAnnouncementDto';
-import { AnnouncementsService } from './AnnouncementsService';
+
 
 @Controller()
 export class AppController {
@@ -64,10 +63,5 @@ export class AppController {
     id: number,
   ): Promise<{ message: string }> {
     return this.appService.delete(id);
-  }
-
-@Post('/announcements')
-  create(@Body() createAnnouncementDto: CreateAnnouncementDto) {
-    return this.AnnouncementsService.create(createAnnouncementDto);
   }
 }

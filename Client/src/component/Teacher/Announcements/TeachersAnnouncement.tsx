@@ -1,3 +1,4 @@
+
 import React from "react";
 import {
   Container,
@@ -12,6 +13,7 @@ import {
 import LeftBar from "../SideBar/LeftBar";
 import useAnnouncementStore from "../../Store/AnnouncementStore";
 import RightBar from "../SideBar/RightBar";
+import axios from "axios";
 
 function TeachersAnnouncements() {
   const { title, description, setTitle, setDescription, resetForm } =
@@ -30,16 +32,10 @@ function TeachersAnnouncements() {
   const handlePost = () => {
     const announcementData = { title, description };
 
-    fetch(`${process.env.REACT_APP_SERVER_LINK}/announcements`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(announcementData),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Announcement posted successfully:", data);
+    axios
+      .post(`${process.env.REACT_APP_SERVER_LINK}/posts`, announcementData)
+      .then((response) => {
+        console.log("Announcement posted successfully:", response.data);
         setTitle("");
         setDescription("");
       })
