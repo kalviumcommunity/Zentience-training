@@ -93,7 +93,7 @@ const ManageStudent: React.FC = () => {
       }
   
       const data = await response.json();
-      const filtered = data.filter((item: Student) => e === item.Class);
+      const filtered = data.filter((item: Student) => e === item.Class && Teachername===item.Teachername );
       setcandidate(filtered);
     } catch (error) {
       console.error('Error retrieving students:', error);

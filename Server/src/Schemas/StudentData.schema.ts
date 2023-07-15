@@ -9,7 +9,7 @@ export class StudentData {
   @Prop({ required: true })
   Class: string;
   @Prop({ required: true })
-  Rollno: string;
+  Rollno: number;
   @Prop({ required: true })
   Teachername: string;
 }
