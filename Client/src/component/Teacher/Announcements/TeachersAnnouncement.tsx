@@ -34,12 +34,12 @@ function TeachersAnnouncements() {
 
     axios
       .post(`${process.env.REACT_APP_SERVER_LINK}/posts`, announcementData)
-      .then((response) => {
+      .then((response:any) => {
         console.log("Announcement posted successfully:", response.data);
         setTitle("");
         setDescription("");
       })
-      .catch((error) => {
+      .catch((error:any) => {
         console.error("Error posting announcement:", error);
       });
     resetForm();

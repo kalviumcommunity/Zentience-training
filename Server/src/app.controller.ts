@@ -12,6 +12,7 @@ import { StudentData } from './Schemas/StudentData.schema';
 import { Createstudentdto } from './DTO/create-student.dto';
 import { addedstudentdto } from './DTO/add-Student.dto';
 import { addedstudent } from './Schemas/Added-student.schema';
+import { HttpCode } from '@nestjs/common';
 
 
 @Controller()
@@ -39,13 +40,16 @@ export class AppController {
     return this.appService.addStudent(body);
   }
 
+
+
   @Post('/login')
+  @HttpCode(200) 
   async checkstudent(
-    @Body()
-    body: any,
+    @Body() body: any,
   ): Promise<{ message: string }> {
     return this.appService.checkstudent(body);
   }
+  
 
   @Patch('/studentData/:id')
   async updatestudent(
