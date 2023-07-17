@@ -1,7 +1,9 @@
 import { Box, Flex, Heading } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 import React from "react";
 
 function StudentRightBar() {
+  const navigate = useNavigate();
   const sidebarStyles = {
     h: "calc(100vh)",
     w: "200px",
@@ -53,6 +55,14 @@ function StudentRightBar() {
     },
   };
 
+  const token = localStorage.getItem("accessToken");
+  console.log(token);
+
+  const logout = () => {
+    localStorage.removeItem("accessToken");
+    navigate("/");
+  };
+
   return (
     <Flex
       sx={sidebarStyles}
@@ -80,6 +90,7 @@ function StudentRightBar() {
           bg="rgba(255, 0, 0, 0.1)"
           textColor="rgba(255, 0, 0, 0.6)"
           align="center"
+          onClick={logout}
         >
           {" "}
           Log out
@@ -89,4 +100,4 @@ function StudentRightBar() {
   );
 }
 
-export default StudentRightBar ;
+export default StudentRightBar;

@@ -3,10 +3,13 @@ import "./LandingPage.css"; // Import the CSS file for styling
 import { LoginButton } from "../Teacher/TeacherLogin/TeacherLogin";
 import { useNavigate } from "react-router-dom";
 import useUserStore from "../../store";
-
+import { useEffect } from "react";
 const LandingPage = () => {
   const navigate = useNavigate();
-
+// useEffect(() => {
+//   // Reload the page
+//   window.location.reload();
+// }, [ ]);
   const { isTeacher, setIsTeacher } = useUserStore();
 
 const handleClick = () => {
