@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { StudentData } from './Schemas/StudentData.schema';
 import * as mongoose from 'mongoose';
+import * as jwt from 'jsonwebtoken'
 import { addedstudent } from './Schemas/Added-student.schema';
 
 @Injectable()
@@ -10,7 +11,7 @@ export class AppService {
     @InjectModel(StudentData.name)
     private studentModel: mongoose.Model<StudentData>,
     @InjectModel(addedstudent.name)
-    private addedStudentModel: mongoose.Model<addedstudent>,
+    private addedStudentModel: mongoose.Model<addedstudent>
   ) {}
 
   async findAll(): Promise<StudentData[]> {
@@ -18,15 +19,25 @@ export class AppService {
     return data;
   }
 
-  async checkstudent(body: any): Promise<{ message: string }> {
+  async checkstudent(body: any): Promise<{ message: string; token?: string }> {
     const { username, password } = body;
     const data = await this.addedStudentModel.findOne({
       $and: [{ email: username }, { password: password }],
     });
     if (data) {
-      return { message: 'student login successfully' };
+      const token = jwt.sign(
+        {
+          emails: data.email,
+        },
+        process.env.JSON_TOKEN_KEy,
+        {
+          expiresIn: 360000,
+        }
+      );
+
+      return { message: "student login successfully", token: token };
     } else {
-      return { message: 'student not found' };
+      return { message: "student not found" };
     }
   }
 
@@ -48,9 +59,9 @@ export class AppService {
 
       await student.save();
 
-      return { message: 'Data updated successfully' };
+      return { message: "Data updated successfully" };
     } else {
-      return { message: 'Student not found' };
+      return { message: "Student not found" };
     }
   }
 
@@ -60,7 +71,7 @@ export class AppService {
     if (student) {
       return { message: `${clas.Class}` };
     } else {
-      return { message: 'Student not found' };
+      return { message: "Student not found" };
     }
   }
 }

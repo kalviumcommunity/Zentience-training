@@ -14,6 +14,7 @@ import {
 import {useNavigate} from "react-router-dom"
 import useAuthStore from "../../Store/AuthStore";
 
+
 function StudentLogin() {
   const { username, password, error, setUsername, setPassword, setError } =
     useAuthStore();
@@ -71,9 +72,14 @@ function StudentLogin() {
       })
         .then(response => response.json())
         .then(data => {
+          
+          
             if(data.message === 'student login successfully'){
+
+              const token =data.token
+              localStorage.setItem("accessToken", token);
               
-              navigate('/Studenthome')
+              navigate('/home')
             }else{
               console.log("not match")
             }
