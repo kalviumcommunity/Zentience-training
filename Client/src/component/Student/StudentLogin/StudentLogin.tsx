@@ -72,7 +72,12 @@ function StudentLogin() {
       })
         .then(response => response.json())
         .then(data => {
+          
+          
             if(data.message === 'student login successfully'){
+
+              const token =data.token
+              localStorage.setItem("accessToken", token);
               
               navigate('/home')
             }else{
