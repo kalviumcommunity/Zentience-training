@@ -1,4 +1,3 @@
-
 import { create } from 'zustand';
 
 interface Announcement {
@@ -26,13 +25,17 @@ const useAnnouncementStore = create<AnnouncementStore>((set) => ({
 
   fetchAnnouncements: async () => {
     try {
-      const response = await fetch('http://localhost:3001/announcements');
+      const response = await fetch(`${process.env.REACT_APP_SERVER_LINK}/posts`);
+      if (!response.ok) {
+        throw new Error("Failed to fetch announcements");
+      }
       const data = await response.json();
       set({ announcements: data });
     } catch (error) {
-      console.error('Error fetching announcements:', error);
+      console.error("Error fetching announcements:", error);
     }
   },
+  
 
   resetForm: () => {
     set({ title: '', description: '' });

@@ -29,6 +29,7 @@ function App() {
         <Route path="/teachersannouncements" element={<AuthenticationGuard component={TeachersAnnouncements}/>}/>
         <Route path="*" element={<ErrorPage/>}
         />
+        <Route path="/studentannouncements" element={<StudentsAnnouncements />} />
       </Routes>
       </Auth0ProviderWithNavigate>
     );
@@ -39,7 +40,7 @@ function App() {
         <Route path="/studentlogin" element={<StudentLogin />} />
         <Route path="/home" element={<StudentDasboard />} />
         <Route path="/assignments" element={<Assignments/>} />
-        <Route path="/studentannouncements" element={<StudentsAnnouncements />} />
+        
         <Route path="*" element={<ErrorPage/>}/>
       </Routes>
     );
