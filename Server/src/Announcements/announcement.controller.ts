@@ -15,7 +15,8 @@ export class PostController {
     @Body('title') title: string,
     @Body('description') description: string,
   ): Promise<PostDocument> {
-    const createdPost = new this.postModel({ title, description });
+    // const createdPost = new this.postModel({ title, description });
+    const createdPost = await this.postModel.create({ title, description });
     return createdPost.save();
   }
 }
