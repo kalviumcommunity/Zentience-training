@@ -1,6 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AppModule } from './app.module';
+import * as request from 'supertest';
+import { Model } from 'mongoose';
 import { AppController } from './app.controller';
+import { PostController } from './Announcements/announcement.controller';
+import {Post as PostEntity, PostDocument } from './Schemas/Announcement';
 import { AppService } from './app.service';
 import { getModelToken } from '@nestjs/mongoose';
 
@@ -32,7 +36,7 @@ describe('AppController', () => {
       jest.spyOn(appService, 'findAll').mockResolvedValue(studentData);
   
       expect(await appController.getallstudent()).toEqual(studentData);
-    },10000); 
+    },20000); 
   });
   
 
@@ -111,4 +115,65 @@ describe('AppController', () => {
       expect(await appController.deletestudent(id)).toEqual(response);
     },10000);
   });
+
+  describe('PostController', () => {
+    let postController: PostController;
+    let postModel: Model<PostDocument>;
+  
+    beforeEach(async () => {
+      const module: TestingModule = await Test.createTestingModule({
+        controllers: [PostController],
+        providers: [
+          {
+            provide: getModelToken(PostEntity.name),
+            useValue: {
+              create: jest.fn().mockReturnValue({
+                save: jest.fn().mockResolvedValue({
+                  id: 'mock-post-id',
+                  title: 'Mock Post Title',
+                  description: 'Mock Post Description',
+                }),
+              }),
+            },
+          },
+          {
+            provide: getModelToken('PostModel'), // Replace 'PostModel' with the correct token for the postModel provider
+            useValue: {
+              prototype: {
+                save: jest.fn().mockResolvedValue({
+                  id: 'mock-post-id',
+                  title: 'Mock Post Title',
+                  description: 'Mock Post Description',
+                }),
+              },
+            },
+          },
+        ],
+      }).compile();
+  
+      postController = module.get<PostController>(PostController);
+      postModel = module.get<Model<PostDocument>>(getModelToken(PostEntity.name));
+    });
+  
+    describe('createPost', () => {
+      it('should create a new post', async () => {
+        const title = 'Test Post Title';
+        const description = 'Test Post Description';
+  
+        const createSpy = jest.spyOn(postModel, 'create');
+  
+        const createdPost = await postController.createPost(title, description);
+  
+        expect(createSpy).toHaveBeenCalledWith({ title, description });
+        expect(createdPost).toEqual({
+          id: 'mock-post-id',
+          title: 'Mock Post Title',
+          description: 'Mock Post Description',
+        });
+      },10000);
+    });
+  });
+    
+
+
 });

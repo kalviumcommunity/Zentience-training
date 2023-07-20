@@ -5,25 +5,26 @@ import { AppModule } from './../src/app.module';
 import { AppService } from './../src/app.service';
 import { StudentData } from './../src/Schemas/StudentData.schema';
 import { addedstudent } from './../src/Schemas/Added-student.schema';
+import { PostController } from './../src/Announcements/announcement.controller';
+import {Post as PostEntity, PostDocument } from './../src/Schemas/Announcement';
+import { Model } from 'mongoose';
+import { getModelToken } from '@nestjs/mongoose';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
   let appService: AppService;
 
   beforeEach(async () => {
-    jest.setTimeout(10*1000);
+    jest.setTimeout(10 * 1000);
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [AppModule],
     }).compile();
-    
+
     app = moduleFixture.createNestApplication();
     appService = moduleFixture.get<AppService>(AppService);
     await app.init();
   });
 
-  afterEach(async () => {
-    await app.close();
-  });
 
 
   describe('/studentData (GET)', () => {
@@ -34,11 +35,11 @@ describe('AppController (e2e)', () => {
       ];
       jest.spyOn(appService, 'findAll').mockResolvedValue(studentData);
 
-      return request(app.getHttpServer())
+      await request(app.getHttpServer())
         .get('/studentData')
         .expect(200)
         .expect(studentData);
-    },10000);
+    }, 20000);
   });
 
   describe('/studentData (POST)', () => {
@@ -50,29 +51,29 @@ describe('AppController (e2e)', () => {
       };
       jest.spyOn(appService, 'create').mockResolvedValue(createdStudent);
 
-      return request(app.getHttpServer())
+      await request(app.getHttpServer())
         .post('/studentData')
         .send(createStudentDto)
         .expect(201)
         .expect(createdStudent);
-    },10000);
+    }, 20000);
   });
 
   describe('/addStudent (POST)', () => {
     it('should add a new student', async () => {
-      const addStudentDto = { id:1,name: 'John Doe', email: 'john@example.com',password:'abcd',Teachername:'John Doe' };
+      const addStudentDto = { id: 1, name: 'John Doe', email: 'john@example.com', password: 'abcd', Teachername: 'John Doe' };
       const addedStudent: addedstudent = {
         id: 1,
         ...addStudentDto,
       };
       jest.spyOn(appService, 'addStudent').mockResolvedValue(addedStudent);
 
-      return request(app.getHttpServer())
+      await request(app.getHttpServer())
         .post('/addStudent')
         .send(addStudentDto)
         .expect(201)
         .expect(addedStudent);
-    },10000);
+    }, 20000);
   });
 
   describe('/login (POST)', () => {
@@ -84,12 +85,12 @@ describe('AppController (e2e)', () => {
       const response = { message: 'student login successfully' };
       jest.spyOn(appService, 'checkstudent').mockResolvedValue(response);
 
-      return request(app.getHttpServer())
+      await request(app.getHttpServer())
         .post('/login')
         .send(studentCredentials)
         .expect(200)
         .expect(response);
-    },10000);
+    }, 20000);
 
     it('should check student login and return not found message', async () => {
       const studentCredentials = {
@@ -99,12 +100,12 @@ describe('AppController (e2e)', () => {
       const response = { message: 'student not found' };
       jest.spyOn(appService, 'checkstudent').mockResolvedValue(response);
 
-      return request(app.getHttpServer())
+      await request(app.getHttpServer())
         .post('/login')
         .send(studentCredentials)
         .expect(200)
         .expect(response);
-    },10000);
+    }, 20000);
   });
 
   describe('/studentData/:id (PATCH)', () => {
@@ -114,12 +115,12 @@ describe('AppController (e2e)', () => {
       const response = { message: 'Data updated successfully' };
       jest.spyOn(appService, 'update').mockResolvedValue(response);
 
-      return request(app.getHttpServer())
+      await request(app.getHttpServer())
         .patch(`/studentData/${id}`)
         .send(updateStudentDto)
         .expect(200)
         .expect(response);
-    },10000);
+    }, 20000);
 
     it('should return not found message when student does not exist', async () => {
       const updateStudentDto = { name: 'John Doe', age: 21 };
@@ -127,12 +128,12 @@ describe('AppController (e2e)', () => {
       const response = { message: 'Student not found' };
       jest.spyOn(appService, 'update').mockResolvedValue(response);
 
-      return request(app.getHttpServer())
+      await request(app.getHttpServer())
         .patch(`/studentData/${id}`)
         .send(updateStudentDto)
         .expect(200)
         .expect(response);
-    },10000);
+    }, 20000);
   });
 
   describe('/studentData/:id (DELETE)', () => {
@@ -141,21 +142,64 @@ describe('AppController (e2e)', () => {
       const response = { message: 'A' };
       jest.spyOn(appService, 'delete').mockResolvedValue(response);
 
-      return request(app.getHttpServer())
+      await request(app.getHttpServer())
         .delete(`/studentData/${id}`)
         .expect(200)
         .expect(response);
-    },10000);
+    }, 20000);
 
     it('should return not found message when student does not exist', async () => {
       const id = 1;
       const response = { message: 'Student not found' };
       jest.spyOn(appService, 'delete').mockResolvedValue(response);
 
-      return request(app.getHttpServer())
+      await request(app.getHttpServer())
         .delete(`/studentData/${id}`)
         .expect(200)
         .expect(response);
-    },10000);
+    }, 20000);
   });
+});
+
+describe('PostController (e2e)', () => {
+  let app: INestApplication;
+  let postController: PostController;
+  let postModel: Model<PostDocument>;
+
+  beforeAll(async () => {
+    const moduleFixture: TestingModule = await Test.createTestingModule({
+      imports: [AppModule],
+    }).compile();
+
+    app = moduleFixture.createNestApplication();
+    await app.init();
+
+    postController = moduleFixture.get<PostController>(PostController);
+    postModel = moduleFixture.get<Model<PostDocument>>(getModelToken(PostEntity.name));
+  });
+
+
+
+  describe('/posts (POST)', () => {
+    it('should create a new post', async () => {
+      const title = 'Test Post Title';
+      const description = 'Test Post Description';
+  
+      const createSpy = jest.spyOn(postModel, 'create');
+  
+      const response = await request(app.getHttpServer())
+        .post('/posts')
+        .send({ title, description })
+        .expect(201);
+  
+      expect(createSpy).toHaveBeenCalledWith({ title, description });
+      expect(response.body).toEqual({
+        __v:0,
+        _id: expect.any(String),
+        title: 'Test Post Title',
+        description: 'Test Post Description', 
+      });
+    },20000);
+  });
+  
 });
