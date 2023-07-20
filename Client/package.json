@@ -31,7 +31,9 @@
     "json-server": "json-server --watch db.json --port 3001",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "browserslist": {
     "production": [
@@ -46,8 +48,20 @@
     ]
   },
   "devDependencies": {
+    "@storybook/addon-essentials": "^7.0.27",
+    "@storybook/addon-interactions": "^7.0.27",
+    "@storybook/addon-links": "^7.0.27",
+    "@storybook/blocks": "^7.0.27",
+    "@storybook/preset-create-react-app": "^7.0.27",
+    "@storybook/react": "^7.0.27",
+    "@storybook/react-webpack5": "^7.0.27",
+    "@storybook/testing-library": "^0.0.14-next.2",
     "@types/react-router-dom": "^5.3.3",
     "@types/react-table": "^7.7.14",
-    "concurrently": "^8.2.0"
+    "babel-plugin-named-exports-order": "^0.0.2",
+    "concurrently": "^8.2.0",
+    "prop-types": "^15.8.1",
+    "storybook": "^7.0.27",
+    "webpack": "^5.88.2"
   }
 }
