@@ -27,6 +27,8 @@ function ComposeAssignment() {
   const handlePost = () => {
     const assignmentData = { title, description, subject, fileFormat };
 
+    console.log(assignmentData);
+
     axios
       .post(`${process.env.REACT_APP_SERVER_LINK}/assignments`, assignmentData)
       .then((response) => {
