@@ -12,6 +12,7 @@ import ManageStudent from "./component/Teacher/Managestudent/ManageStudent";
 import { Auth0ProviderWithNavigate } from "./auth-provider";
 import { AuthenticationGuard } from "./authentication-guard";
 import { ErrorPage } from "./component/404Error/ErrorPage";
+import ComposeAssignment from "./component/Teacher/AssignTasks/ComposeAssignment";
 
 function App() {
   const isTeacher = useUserStore((state) => state.isTeacher);
@@ -26,6 +27,7 @@ function App() {
         <Route path="/home" element={<AuthenticationGuard component={Dasboard} />} />
         <Route path="/managestudents" element={<AuthenticationGuard component={ManageStudent} />} />
         <Route path="/assigntasks" element={<AuthenticationGuard component={AssignTasks} />} />
+        <Route path="/composeassignment" element={<AuthenticationGuard component={ComposeAssignment} />} />
         <Route path="/teachersannouncements" element={<AuthenticationGuard component={TeachersAnnouncements}/>}/>
         <Route path="*" element={<ErrorPage/>}
         />
