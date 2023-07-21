@@ -16,29 +16,11 @@ import useAnnouncementStore from "../../Store/AnnouncementStore";
 
 function StudentsAnnouncements() {
   const announcements = useAnnouncementStore((state) => state.announcements);
-  const fetchAnnouncements = useAnnouncementStore(
-    (state) => state.fetchAnnouncements
-  );
+  const fetchAnnouncements = useAnnouncementStore((state) => state.fetchAnnouncements);
 
   useEffect(() => {
     fetchAnnouncements();
   }, []);
-
-  const addButtonStyles = {
-    height: "60px",
-    width: "60px",
-    position: "fixed",
-    right: "240px",
-    bottom: "30px",
-    justifyContent: "center",
-    align: "center",
-    borderRadius: "50%",
-    fontSize: "30px",
-    fontWeight: "600",
-    bg: "#14274E",
-    textColor: "white",
-    cursor: "pointer",
-  };
 
   return (
     <div className="assigntasks">
