@@ -23,7 +23,7 @@ export const LoginButton: React.FC = () => {
   return (
     <button onClick={handleLogin} className="login-button">
       For Teachers
-      <div>
+      <div style={{display:'flex'}}>
         <img
           src="./assets/triangle.svg"
           alt="Image"

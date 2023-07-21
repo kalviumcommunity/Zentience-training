@@ -37,7 +37,7 @@ const handleClick = () => {
               onClick={handleClick}
             >
               For Students
-              <div>
+              <div style={{display:'flex'}}>
                 <img
                   src="./assets/triangle.svg"
                   alt="Image"

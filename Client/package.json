@@ -61,7 +61,7 @@
     "babel-plugin-named-exports-order": "^0.0.2",
     "concurrently": "^8.2.0",
     "prop-types": "^15.8.1",
-    "storybook": "^7.0.27",
+    "storybook": "^7.1.0",
     "webpack": "^5.88.2"
   }
 }

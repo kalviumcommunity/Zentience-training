@@ -3,7 +3,8 @@ import React from 'react'
 
 type AnnouncementCardProps = {
     title: string,
-    announcement: string
+    announcement: string,
+    isActive: boolean
 }
 
 function AnnouncementCard(props: AnnouncementCardProps) {
