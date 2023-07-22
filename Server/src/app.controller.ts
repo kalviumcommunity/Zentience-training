@@ -13,6 +13,8 @@ import { Createstudentdto } from './DTO/create-student.dto';
 import { addedstudentdto } from './DTO/add-Student.dto';
 import { addedstudent } from './Schemas/Added-student.schema';
 import { HttpCode } from '@nestjs/common';
+import { AssignmentData } from './Schemas/AssignmentSchema';
+import { composeassignmentdto } from './DTO/ComposeAssignment.dto';
 
 
 @Controller()
@@ -40,7 +42,14 @@ export class AppController {
     return this.appService.addStudent(body);
   }
 
-
+  @Post('/assignments')
+  async createPost(
+    @Body() 
+    body: composeassignmentdto,
+  ): Promise<AssignmentData> {
+    // const createdTask = new this.postModel({ title, description, subject, fileFormat });
+    return this.appService.composeAssignment(body);
+  }
 
   @Post('/login')
   @HttpCode(200) 

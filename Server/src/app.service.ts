@@ -4,6 +4,7 @@ import { StudentData } from './Schemas/StudentData.schema';
 import * as mongoose from 'mongoose';
 import * as jwt from 'jsonwebtoken'
 import { addedstudent } from './Schemas/Added-student.schema';
+import { AssignmentData } from './Schemas/AssignmentSchema';
 
 @Injectable()
 export class AppService {
@@ -11,7 +12,9 @@ export class AppService {
     @InjectModel(StudentData.name)
     private studentModel: mongoose.Model<StudentData>,
     @InjectModel(addedstudent.name)
-    private addedStudentModel: mongoose.Model<addedstudent>
+    private addedStudentModel: mongoose.Model<addedstudent>,
+    @InjectModel(AssignmentData.name)
+    private AssignmentDataModel: mongoose.Model<AssignmentData>
   ) {}
 
   async findAll(): Promise<StudentData[]> {
@@ -73,5 +76,11 @@ export class AppService {
     } else {
       return { message: "Student not found" };
     }
+  }
+
+
+  async composeAssignment(assignment: AssignmentData): Promise<AssignmentData> {
+    const res = await this.AssignmentDataModel.create(assignment);
+    return res;
   }
 }
