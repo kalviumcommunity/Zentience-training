@@ -134,7 +134,37 @@ describe('AppController (e2e)', () => {
         .expect(200)
         .expect(response);
     }, 20000);
+  }); 
+
+
+
+
+  describe('/assignments (POST)', () => {
+    it('should create and return an assignment', async () => {
+      const assignmentData = {
+        title: 'Test Assignment',
+        description: 'Test Assignment Description',
+        subject: 'Math',
+        fileFormat: 'pdf',
+      };
+  
+      return await request(app.getHttpServer())
+        .post('/assignments')
+        .send(assignmentData)
+        .expect(201)
+        .then((response) => {
+          const createdAssignment = response.body;
+          expect(createdAssignment._id).toBeDefined();
+          expect(createdAssignment.title).toEqual(assignmentData.title);
+          expect(createdAssignment.description).toEqual(assignmentData.description);
+          expect(createdAssignment.subject).toEqual(assignmentData.subject);
+          expect(createdAssignment.fileFormat).toEqual(assignmentData.fileFormat);
+        });
+    });
   });
+
+
+
 
   describe('/studentData/:id (DELETE)', () => {
     it('should delete an existing student', async () => {
@@ -200,6 +230,48 @@ describe('PostController (e2e)', () => {
         description: 'Test Post Description', 
       });
     },20000);
+  });
+
+  describe('/posts (GET)', () => {
+    it('should return an array of announcements', async () => {
+      const expectedAnnouncements = [
+        {
+          id: 1,
+          title: 'Mock Post 1',
+          description: 'Mock Post Description 1',
+        },
+        {
+          id: 2,
+          title: 'Mock Post 2',
+          description: 'Mock Post Description 2',
+        },
+      ];
+  
+      jest.spyOn(postModel, 'find').mockResolvedValue(expectedAnnouncements);
+  
+      return await request(app.getHttpServer())
+        .get('/posts')
+        .expect(200)
+        .then((response) => {
+          const announcements: PostDocument[] = response.body;
+          expect(announcements).toEqual(expectedAnnouncements);
+        });
+    });
+  
+    it('should handle errors', async () => {
+      const errorMessage = 'Error fetching announcements';
+    
+      jest.spyOn(postModel, 'find').mockRejectedValue(new Error(errorMessage));
+    
+      return await request(app.getHttpServer())
+        .get('/posts')
+        .expect(500)
+        .then((response) => {
+          const { message }: { message: string } = response.body;
+          expect(message).toMatch(/Internal server error|Error fetching announcements/);
+        });
+    });
+    
   });
   
 });

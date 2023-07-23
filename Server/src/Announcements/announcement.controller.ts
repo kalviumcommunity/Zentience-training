@@ -22,7 +22,8 @@ export class PostController {
   @Get()
   async getAllAnnouncements(): Promise<PostDocument[]> {
     try {
-      const announcements = await this.postModel.find().exec();
+      const announcements = await this.postModel.find();
+      // const announcements = await this.postModel.find().exec();
       console.log(announcements); 
       return announcements;
     } catch (error) {

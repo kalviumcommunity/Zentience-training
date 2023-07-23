@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AppModule } from './app.module';
 import * as request from 'supertest';
+import { Query } from 'mongoose';
 import { Model } from 'mongoose';
 import { AppController } from './app.controller';
 import { PostController } from './Announcements/announcement.controller';
@@ -38,6 +39,31 @@ describe('AppController', () => {
       expect(await appController.getallstudent()).toEqual(studentData);
     },20000); 
   });
+
+  
+  describe('composeAssignment', () => {
+    it('should create and return an assignment', async () => {
+      const assignmentData = {
+        title: 'Test Assignment',
+        description: 'Test Assignment Description',
+        subject: 'Math',
+        fileFormat: 'pdf',
+      };
+
+      const expectedAssignment = {
+        _id: 'mock-assignment-id',
+        ...assignmentData,
+      };
+
+      jest.spyOn(appService, 'composeAssignment').mockResolvedValue(expectedAssignment);
+
+      const result = await appService.composeAssignment(assignmentData);
+
+      expect(appService.composeAssignment).toHaveBeenCalledWith(assignmentData);
+      expect(result).toEqual(expectedAssignment);
+    });
+  });
+
   
 
   describe('createstudent', () => {
@@ -127,6 +153,7 @@ describe('AppController', () => {
           {
             provide: getModelToken(PostEntity.name),
             useValue: {
+              find: jest.fn(),
               create: jest.fn().mockReturnValue({
                 save: jest.fn().mockResolvedValue({
                   id: 'mock-post-id',
@@ -172,8 +199,46 @@ describe('AppController', () => {
         });
       },10000);
     });
-  });
+
+    describe('getAllAnnouncements', () => {
+      it('should return an array of announcements', async () => {
+        const expectedAnnouncements = [
+          {
+            id: 1,
+            title: 'Mock Post 1',
+            description: 'Mock Post Description 1',
+          },
+          {
+            id: 2,
+            title: 'Mock Post 2',
+            description: 'Mock Post Description 2',
+          },
+        ];
+  
+        jest.spyOn(postModel, 'find').mockResolvedValue(expectedAnnouncements);
+  
+        const announcements = await postController.getAllAnnouncements();
+  
+        expect(postModel.find).toHaveBeenCalled();
+        expect(announcements).toEqual(expectedAnnouncements);
+      });
+  
+      it('should handle errors', async () => {
+        const errorMessage = 'Error fetching announcements';
+  
+        jest.spyOn(postModel, 'find').mockRejectedValue(new Error(errorMessage));
+  
+        try {
+          await postController.getAllAnnouncements();
+        } catch (error) {
+          expect(error.message).toBe(errorMessage);
+        }
+      });
+    });
+  
+
     
 
+  });
 
 });
