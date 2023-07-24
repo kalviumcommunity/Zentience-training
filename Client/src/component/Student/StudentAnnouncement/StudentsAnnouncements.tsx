@@ -13,6 +13,7 @@ import {
 } from "@chakra-ui/react";
 import AnnouncementCard from "../../Teacher/Announcements/AnnouncementCard";
 import useAnnouncementStore from "../../Store/AnnouncementStore";
+import { factory } from "typescript";
 
 function StudentsAnnouncements() {
   const announcements = useAnnouncementStore((state) => state.announcements);
@@ -30,12 +31,14 @@ function StudentsAnnouncements() {
         <Heading size="md" m="0 0 20px">
           Announcements
         </Heading>
+        <br />
         <Grid templateColumns="repeat(3, 1fr)">
           {announcements.map((announcement) => (
             <AnnouncementCard
               key={announcement.id}
               title={announcement.title}
               announcement={announcement.description}
+              isActive={false}
             />
           ))}
         </Grid>

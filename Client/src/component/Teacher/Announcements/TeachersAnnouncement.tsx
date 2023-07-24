@@ -48,6 +48,7 @@ function TeachersAnnouncements() {
   return (
     <div className="announcements">
       <LeftBar />
+      <RightBar />
       <Container maxW="1190px" ml="170px">
         <Flex flexDirection="column" alignItems="flex-end">
           <Select
@@ -66,7 +67,7 @@ function TeachersAnnouncements() {
               Compose Announcement
             </Heading>
             <Input
-              width="1074px"
+              width="64vw"
               fontWeight="600"
               color="rgba(0, 0, 0, 0.75)"
               placeholder="Title"
@@ -76,7 +77,7 @@ function TeachersAnnouncements() {
           </div>
           <div style={{ marginTop: "15px" }}>
             <Textarea
-              width="1074px"
+              width="64vw"
               height="381px"
               fontWeight="600"
               color="rgba(0, 0, 0, 0.75)"
@@ -99,7 +100,7 @@ function TeachersAnnouncements() {
           </Button>
         </Flex>
       </Container>
-      <RightBar />
+   
     </div>
   );
 }
