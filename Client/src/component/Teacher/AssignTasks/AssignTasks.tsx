@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import LeftBar from "../SideBar/LeftBar";
 import RightBar from "../SideBar/RightBar";
 import {
@@ -14,6 +14,38 @@ import {
 import TaskCard from "./TaskCard";
 
 function AssignTasks() {
+  const link= process.env.REACT_APP_SERVER_LINK;
+  const [assignments, setAssignments] = useState([]);
+
+  const fetchAssignments = async () => {
+    try {
+      const response = await fetch(`${link}/assignmentsData`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      
+      if (!response.ok) {
+        throw new Error('Failed to retrieve student data');
+      }
+  
+      const data = await response.json();
+      // console.log(data);s
+      return data;
+    } catch (error) {
+      console.error('Error retrieving students:', error);
+    }
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await fetchAssignments();
+      setAssignments(data);
+    };
+    fetchData();
+  }, []);
+
   
 
   const addButtonStyles = {
@@ -41,37 +73,17 @@ function AssignTasks() {
           Active assignments
         </Heading>
         <Grid templateColumns="repeat(2, 1fr)">
-          <TaskCard
-            isActive={true}
-            title="Lorem ipsum dolor sit amet"
-            desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit..."
-            date="Today"
-            actionText="View Submissions"
-          />
-
-          <TaskCard
-            isActive={true}
-            title="Lorem ipsum dolor sit amet"
-            desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit..."
-            date="Today"
-            actionText="View Submissions"
-          />
-
-          <TaskCard
-            isActive={true}
-            title="Lorem ipsum dolor sit amet"
-            desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit..."
-            date="Today"
-            actionText="View Submissions"
-          />
-
-          <TaskCard
-            isActive={true}
-            title="Lorem ipsum dolor sit amet"
-            desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit..."
-            date="Today"
-            actionText="View Submissions"
-          />
+          {
+            assignments && assignments.map((assignment: any) => {
+              return <TaskCard
+                isActive={true}
+                title={assignment.title}
+                desc={assignment.description}
+                date="Today"
+                actionText="View Submissions"
+              />
+            })
+          }
         </Grid>
         <Heading size="md" m="20px 0">
           Previous assignments

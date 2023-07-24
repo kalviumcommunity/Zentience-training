@@ -22,6 +22,11 @@ export class AppService {
     return data;
   }
 
+  async findAssignments(): Promise<AssignmentData[]> {
+    const data = await this.AssignmentDataModel.find();
+    return data;
+  }
+
   async checkstudent(body: any): Promise<{ message: string; token?: string }> {
     const { username, password } = body;
     const data = await this.addedStudentModel.findOne({

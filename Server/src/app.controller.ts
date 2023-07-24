@@ -26,6 +26,11 @@ export class AppController {
     return this.appService.findAll();
   }
 
+  @Get('/assignmentsData')
+  async getAssignments(): Promise<AssignmentData[]> {
+    return this.appService.findAssignments();
+  }
+
   @Post('/studentData')
   async createstudent(
     @Body()
